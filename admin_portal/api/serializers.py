@@ -22,15 +22,20 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['email', 'user_name', 'first_name', 'last_name', 'gender', 'roles', 'marital_status', 'date_of_birth',
+                  'nationality', 'address', 'telephone_number', 'cell_number', 'permanent_address', 'next_of_kin_name',
+                  'next_of_kin_relationship', 'next_of_kin_contact_number', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
+        active = False
+        if validated_data['roles'] == "VISITOR":
+            active = True
+
         user = User.objects.create(
             roles=validated_data['roles'],
             gender=validated_data['gender'],
             marital_status=validated_data['marital_status'],
-            image=validated_data['image'],
             user_name=validated_data['user_name'],
             email=validated_data['email'],
             first_name=validated_data['first_name'],
@@ -42,14 +47,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             cell_number=validated_data['cell_number'],
             permanent_address=validated_data['permanent_address'],
             permanent_telephone_number=validated_data['permanent_telephone_number'],
-            is_staff=validated_data['is_staff'],
-            is_active=validated_data['is_active'],
-            group=validated_data['group'],
+            is_active=active,
             next_of_kin_name=validated_data['next_of_kin_name'],
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
-            date_joined=validated_data['date_joined'],
-            last_login=validated_data['last_login']
         )
 
         user.set_password(validated_data['password'])
