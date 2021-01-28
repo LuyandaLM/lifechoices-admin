@@ -27,11 +27,13 @@ class RegisterSerializer(serializers.ModelSerializer):
                   'permanent_telephone_number', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
-        active = False
-        if validated_data['roles'] == "VISITOR" or 'visitor':
-            active = True
+    @staticmethod
+    def activite_account(data):
+        if data == "VISITOR" or 'visitor':
+            return True
+        return False
 
+    def create(self, validated_data):
         user = User.objects.create(
             roles=validated_data['roles'],
             gender=validated_data['gender'],
@@ -47,7 +49,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             cell_number=validated_data['cell_number'],
             permanent_address=validated_data['permanent_address'],
             permanent_telephone_number=validated_data['permanent_telephone_number'],
-            is_active=active,
+            is_active=self.activite_account(validated_data['roles']),
             next_of_kin_name=validated_data['next_of_kin_name'],
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
