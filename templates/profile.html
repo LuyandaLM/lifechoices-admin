@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section row">
+    <div class="media pt-4">
+      <img class="rounded-circle account-img" src="https://www.dovercourt.org/wp-content/uploads/2019/11/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg">
+      <div class="media-body ml-5">
+        <h2 class="account-heading">{{ user.user_name }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock content%}

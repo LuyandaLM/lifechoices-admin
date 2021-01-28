@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="container-fluid">
+       <h1>Hey, {{ user.user_name }}</h1>
+    <div id="NotificationBox">
+        <div class="notification-item">You have 7 new messages</div>
+        <div class="notification-item">You have 7 new messages</div>
+        <div class="notification-item">You have 7 new messages</div>
+    </div>
+    <div id="NavigationBox" class="row gutter">
+        <div class=" col-6 col-md-4 col-lg-3">
+            <div class="icon-card card">
+                <img src="{% static 'admin_portal/Img/briefcase.png' %}"/>
+                <h2>Check Into Life Choices</h2>
+            </div>
+        </div>
+        <div class=" col-6 col-md-4 col-lg-3">
+            <div class="icon-card card">
+                <img src="{% static 'admin_portal/Img/house-building.png' %}"/>
+                <h2>Check Into Field or Home</h2>
+            </div>
+        </div>
+        <div class=" col-6 col-md-4 col-lg-3">
+            <div class="icon-card card">
+                <img src="{% static 'admin_portal/Img/conversation.png' %}"/>
+                <h2>Messages</h2>
+            </div>
+        </div>
+        <div class=" col-6 col-md-4 col-lg-3">
+            <div class="icon-card card">
+                <img src="{% static 'admin_portal/Img/calendar-interface-symbol-tool.png' %}"/>
+                <h2>Leave Days</h2>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</div>
+{% endblock content %}
