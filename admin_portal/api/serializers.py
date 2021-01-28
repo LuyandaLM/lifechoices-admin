@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email', 'user_name', 'first_name', 'last_name', 'gender', 'roles', 'marital_status', 'date_of_birth',
                   'nationality', 'address', 'telephone_number', 'cell_number', 'permanent_address', 'next_of_kin_name',
-                  'next_of_kin_relationship', 'next_of_kin_contact_number', 'password']
+                  'permanent_telephone_number', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
