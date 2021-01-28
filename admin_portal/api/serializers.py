@@ -29,7 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         active = False
-        if validated_data['roles'] == "VISITOR":
+        if validated_data['roles'] == "VISITOR" or 'visitor':
             active = True
 
         user = User.objects.create(
