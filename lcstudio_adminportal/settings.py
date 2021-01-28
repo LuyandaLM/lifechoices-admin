@@ -101,9 +101,9 @@ WSGI_APPLICATION = 'lcstudio_adminportal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zljpmiqy',
-        'USER': 'zljpmiqy',
-        'PASSWORD': 'iVZlYK9VzvkHhN3MSdFzJRiPKST3NKOY',
+        'NAME': 'nzmkjniw',
+        'USER': 'nzmkjniw',
+        'PASSWORD': 'rfEbALl_arWsuNI-Fy1PyLmA52YVqLQx',
         'HOST': 'ziggy.db.elephantsql.com',
         'PORT': '5432',
     }
@@ -155,6 +155,6 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = "admin_portal.User"
+# AUTH_USER_MODEL = "admin_portal.User"
 
 django_heroku.settings(locals())
