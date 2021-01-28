@@ -155,6 +155,6 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
-# AUTH_USER_MODEL = "admin_portal.User"
+AUTH_USER_MODEL = "admin_portal.User"
 
 django_heroku.settings(locals())
