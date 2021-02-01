@@ -29,8 +29,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     @staticmethod
-    def activite_account(data):
-        if data == "VISITOR" or 'visitor':
+    def activate_account(self):
+        if self.data == "VISITOR" or 'visitor':
             return True
         return False
 
@@ -53,7 +53,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return group
 
     def create(self, validated_data):
-        group = self.set_user_group(validated_data['roles'])
+
         user = User.objects.create(
             roles=validated_data['roles'],
             gender=validated_data['gender'],
@@ -74,6 +74,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
         )
+        user.save(commit=False)
+        #   group = self.set_user_group(validated_data['roles'])
+        group = validated_data['roles']
         user.groups.add(group)
         user.set_password(validated_data['password'])
         user.save()
