@@ -76,7 +76,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         #   group = self.set_user_group(validated_data['roles'])
-        group = validated_data['roles']
+        group = Group.objects.get(name=validated_data['roles'])
         user.groups.add(group)
         user.set_password(validated_data['password'])
         user.save()
