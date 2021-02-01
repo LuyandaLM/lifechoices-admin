@@ -69,7 +69,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             cell_number=validated_data['cell_number'],
             permanent_address=validated_data['permanent_address'],
             permanent_telephone_number=validated_data['permanent_telephone_number'],
-            is_active=self.activite_account(validated_data['roles']),
+            is_active=self.activate_account(validated_data['roles']),
             next_of_kin_name=validated_data['next_of_kin_name'],
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
