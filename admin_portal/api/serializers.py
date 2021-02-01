@@ -74,7 +74,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
         )
-        user.save(commit=False)
+
         #   group = self.set_user_group(validated_data['roles'])
         group = validated_data['roles']
         user.groups.add(group)
