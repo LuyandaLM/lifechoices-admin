@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from admin_portal.models import CovidQuestionnaire, LeaveApplication, User
+from django.contrib.auth.models import Group
 
 
 class CovidQuestionnaireSerializer(serializers.ModelSerializer):
@@ -33,7 +34,26 @@ class RegisterSerializer(serializers.ModelSerializer):
             return True
         return False
 
+    @staticmethod
+    def set_user_group(data):
+        group = []
+        print(data)
+        if data == "VISITOR" or 'visitor':
+            print('im a visitor')
+            group = Group.objects.get(name='visitor')
+        elif data == "BUSINESS UNIT" or 'business_unit':
+            print("im part of the business unit")
+            group = Group.objects.get(name='lcstudio')
+        elif data == "STUDENT" or 'student':
+            print("im a student")
+            group = Group.objects.get(name='lcstudent')
+        elif data == "STAFF" or 'staff':
+            print("im a stuff")
+            group = Group.objects.get(name='lcstuff')
+        return group
+
     def create(self, validated_data):
+        group = self.set_user_group(validated_data['roles'])
         user = User.objects.create(
             roles=validated_data['roles'],
             gender=validated_data['gender'],
@@ -54,10 +74,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             next_of_kin_relationship=validated_data['next_of_kin_relationship'],
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
         )
-
+        user.groups.add(group)
         user.set_password(validated_data['password'])
         user.save()
-
         return user
 
 
