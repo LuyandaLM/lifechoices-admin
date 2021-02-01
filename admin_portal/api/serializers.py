@@ -29,8 +29,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     @staticmethod
-    def activate_account(self):
-        if self.data == "VISITOR" or 'visitor':
+    def activate_account(data):
+        if data == "VISITOR" or 'visitor':
             return True
         return False
 
