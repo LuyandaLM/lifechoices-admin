@@ -137,7 +137,7 @@ class LifeChoicesStuff(models.Model):
 
 # Covid Questionnaires
 class CovidQuestionnaire(models.Model):
-    user = models.ForeignKey(LifeChoicesStuff, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     # info
     temperature = models.DecimalField(max_digits=5, decimal_places=2)
     Shortness_of_breath = models.BooleanField(default=True)

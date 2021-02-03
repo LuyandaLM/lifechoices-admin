@@ -15,6 +15,7 @@ from django.http import JsonResponse
 from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 
 from admin_portal.models import CovidQuestionnaire, LeaveApplication, User
 from .serializers import CovidQuestionnaireSerializer, LeaveApplicationSerializer, UserSerializer, RegisterSerializer, \
@@ -23,12 +24,16 @@ from .serializers import CovidQuestionnaireSerializer, LeaveApplicationSerialize
 
 class CovidList(APIView):
 
+    # @login_required
     def get(self, request):
-        questionnaires = CovidQuestionnaire.objects.all()
+        questionnaires = CovidQuestionnaire.objects.filter(user=self.request.user.id)
         serializer = CovidQuestionnaireSerializer(questionnaires, many=True)
         return Response(serializer.data)
 
     def post(self, request):
+        questionnaires = CovidQuestionnaire.objects.filter(user=self.request.user.id)
+        for covid in questionnaires:
+            print(covid)
         data = JSONParser().parse(request)
         serializer = CovidQuestionnaireSerializer(data=data)
         if serializer.is_valid():

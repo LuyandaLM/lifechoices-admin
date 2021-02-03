@@ -9,7 +9,8 @@ class CovidQuestionnaireSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CovidQuestionnaire
-        fields = '__all__'
+        fields = ["temperature", "Shortness_of_breath", "sore_throat", "loss_of_taste_or_smell", "contact_with_Covid",
+                  "nasal_congestion", "diarrhea", "nausea"]
 
 
 class LeaveApplicationSerializer(serializers.ModelSerializer):
