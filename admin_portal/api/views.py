@@ -8,6 +8,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework import permissions
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from knox.views import LoginView as KnoxLoginView
 
@@ -86,11 +87,11 @@ class MyObtainTokenPairView(TokenObtainPairView):
 
 
 # obtain the users token
-class CustomObtainAuthToken(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
-        token = Token.objects.get(key=response.data['token'])
-        return Response({'token': token.key, 'id': token.user_id})
+# class CustomObtainAuthToken(ObtainAuthToken):
+#     def post(self, request, *args, **kwargs):
+#         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+#         token = Token.objects.get(key=response.data['token'])
+#         return Response({'token': token.key, 'id': token.user_id})
 
 
 csrf_protected_method = method_decorator(csrf_protect)
@@ -101,7 +102,7 @@ class LoginAPI(KnoxLoginView, CustomObtainAuthToken):
     serializer_class = AuthTokenSerializer
     parser_classes = [MultiPartParser]
 
-    @csrf_protected_method
+    #@csrf_protected_method
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)

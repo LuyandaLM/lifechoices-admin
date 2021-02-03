@@ -30,7 +30,7 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_('You must provide an email address'))
 
         email = self.normalize_email(email)
-        other_fields.setdefault('user_name', 'Username')
+        #other_fields.setdefault('user_name', 'Username')
         other_fields.setdefault('first_name', 'First Name')
         other_fields.setdefault('last_name', 'Last Name')
         user = self.model(email=email, password=password, **other_fields)

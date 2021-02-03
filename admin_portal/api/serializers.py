@@ -3,6 +3,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from admin_portal.models import CovidQuestionnaire, LeaveApplication, User
 from django.contrib.auth.models import Group
+from django.contrib.auth.hashers import make_password
 
 
 class CovidQuestionnaireSerializer(serializers.ModelSerializer):
@@ -56,10 +57,21 @@ class RegisterSerializer(serializers.ModelSerializer):
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
         )
 
+
+        def validate_password(self, value: str) -> str:
+            """
+            Hash value passed by user.
+
+            :param value: password of a user
+            :return: a hashed version of the password
+            """
+            return make_password(value)
+
         group = Group.objects.get(name=validated_data['roles'])
         user.groups.add(group)
-        user.set_password(validated_data['password'])
+        user.password = validate_password(value=validated_data['password'])
         user.save()
+        print(user.password)
         return user
 
 
@@ -69,7 +81,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         print(user)
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-        # print(token)
+        print(token)
         # Add custom claims
         token['user_name'] = user.user_name
         return token
