@@ -47,6 +47,7 @@ class LeaveList(APIView):
 
     def post(self, request):
         data = JSONParser().parse(request)
+        data['user'] = self.request.user
         serializer = LeaveApplicationSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

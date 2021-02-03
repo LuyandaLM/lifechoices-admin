@@ -17,7 +17,15 @@ class LeaveApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LeaveApplication
-        fields = '__all__'
+        fields = ["category", "personal_message", "leave_date_from", "leave_date_to", "pre_authorisation"]
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs
+        super().__init__(*args, **kwargs)
+
+    def validate(self, data):
+        data['user'] = self.user['data']['user']
+        return data
 
 
 class RegisterSerializer(serializers.ModelSerializer):
