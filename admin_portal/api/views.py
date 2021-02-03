@@ -27,6 +27,7 @@ class CovidList(APIView):
 
     # @login_required
     def get(self, request):
+        print(self.request.user)
         questionnaires = CovidQuestionnaire.objects.filter(user=self.request.user.id)
         serializer = CovidQuestionnaireSerializer(questionnaires, many=True)
         return Response(serializer.data)

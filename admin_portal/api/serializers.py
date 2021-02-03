@@ -66,8 +66,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             next_of_kin_contact_number=validated_data['next_of_kin_contact_number'],
         )
 
-
-        def validate_password(self, value: str) -> str:
+        def validate_password(value: str) -> str:
             """
             Hash value passed by user.
 
@@ -80,7 +79,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.groups.add(group)
         user.password = validate_password(value=validated_data['password'])
         user.save()
-        print(user.password)
         return user
 
 
