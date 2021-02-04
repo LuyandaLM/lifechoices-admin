@@ -4,6 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from admin_portal.models import CovidQuestionnaire, LeaveApplication, User
 from django.contrib.auth.models import Group
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login
 
 
 class CovidQuestionnaireSerializer(serializers.ModelSerializer):
@@ -86,11 +87,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
-        print(user)
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-        print(token)
+        print(cls)
+        # login(user)
         # Add custom claims
-        token['user_name'] = user.user_name
+        token['email'] = user.email
         return token
 
 

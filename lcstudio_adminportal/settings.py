@@ -55,11 +55,15 @@ INSTALLED_APPS = [
     'admin_portal',
     'users',
 ]
+# eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEyMzYwNTkzLCJqdGkiOiIzM2RhYzU3YTYwZDU0M2ExYTE0ODcwMGFmNTg3MDBkZSIsInVzZXJfaWQiOjEsImVtYWlsIjoibG9ud2Fiby1kZXZAZ21haWwuY29tIn0.7ZPr9FWZjm5waXII2cu3MK0odKxMeJyEYcSt_ccfShg
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
 }
 
 MIDDLEWARE = [
@@ -154,6 +158,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/user/login'
 
 AUTH_USER_MODEL = "admin_portal.User"
 
