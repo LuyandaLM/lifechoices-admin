@@ -147,13 +147,15 @@ h1{
         <a href="{% url 'users:login' %}" id="SignInButton">Sign In</a>
         {% else %}
         <button id="UserDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="rounded-circle" src="https://www.dovercourt.org/wp-content/uploads/2019/11/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg">
+          <img class="rounded-circle" src="{{ user.image.url }}">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-          <a href="{% url 'users:profile' %}" class="dropdown-item" type="button">Account</a>
+          {% if user.roles != 'visitor' %}
           <button class="dropdown-item" type="button">Messages</button>
           <button class="dropdown-item" type="button">Clock In/Out</button>
           <button class="dropdown-item" type="button">Leave Days</button>
+          {% endif %}
+          <a href="{% url 'users:profile' %}" class="dropdown-item" type="button">Account</a>
           <a href="{% url 'users:logout' %}" class="dropdown-item" type="button">Log Out</a>
         </div>
         {% endif %}

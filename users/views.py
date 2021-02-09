@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
 
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, GeneralUserForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
 
 
 class Register(View):
@@ -30,7 +30,31 @@ class Register(View):
 
 @login_required
 def profile(request):
-    # if request.method == 'POST':
+    user_form = GeneralUserForm(instance=request.user)
+    if request.method == "GET":
+        if additional_forms(request)[1]:
+            context = {
+                'form': user_form,
+                'life_choices_form': additional_forms(request)[0],
+                'formset': additional_forms(request)[1],
+            }
+        else:
+            context = {
+                'form': user_form,
+            }
+        return render(request, 'profile.html', context=context)
+
+    if request.method == 'POST':
+        user_form = GeneralUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+
+        # if user_form.is_valid() and formset.is_valid() and life_choices_form.is_valid():
+        #     print("all forms are valid")
+        else:
+            print("this is user_form errors ")
+            # print(user_form)
+
     #     u_form = SimpleUserForm(request.POST, instance=request.user)
     #     p_form = AdminForm(request.POST, instance=request.user)
     #     if request.user in Intern.objects.all():
@@ -41,12 +65,16 @@ def profile(request):
     #         u_form.save()
     #         p_form.save()
     #         messages.success(request, f'Your Account Has Been Updated!')
-    #         return redirect('profile')
+        return redirect('users:profile')
     # else:
     #     form = SimpleUserForm(instance=request.user)
     #
-    # context = {
-    #     'u_form': u_form,
-    #     'p_form': p_form
-    # }
-    return render(request, 'profile.html')  # context)
+
+
+def additional_forms(request):
+    life_choices_form = LifeChoicesForm(instance=request.user)
+    if request.user.roles == 'business_unit' or 'staff':
+        formset = StaffUpdateForm(instance=request.user)
+    elif request.user.roles == 'student':
+        formset = StudentUpdateForm(instance=request.user)
+    return life_choices_form, formset

@@ -177,8 +177,17 @@ a, a:hover, a:active a:focus{
 </head>
 <body>
 <div class="container darkBackground mt-5 pt-5">
-{% block content %}
-{% endblock content %}
+    {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+                {% if message.tags %}
+                <li  class="{{ message.tags }}">{{ message }}</li>
+                {% endif %}
+              {% endfor %}
+          </ul>
+      {% endif %}
+    {% block content %}
+    {% endblock content %}
 </div>
 <script>
 

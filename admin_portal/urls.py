@@ -8,6 +8,6 @@ app_name = 'admin_portal'
 
 urlpatterns = [
     path('', login_required(HomePageView.as_view()), name='home'),
-    path('/covid-questionnaire', CovidQuestionnairePage.as_view(), name='covid-questionnaire'),
+    path('covid-questionnaire/', CovidQuestionnairePage.as_view(), name='covid-questionnaire'),
     path('api/', include('admin_portal.api.urls'))
 ]
