@@ -43,7 +43,8 @@ class CovidQuestionnairePage(View):
                                                      diarrhea=form.cleaned_data['diarrhea'],
                                                      nausea=form.cleaned_data['nausea'])
             # covid_questionnaire.save()
-            messages.success(request, f'{request.user.user_name} form completed successfully')
+            messages.success(request, CovidQuestionnaire.objects.all())
+            messages.success(request, f'{user.user_name} form completed successfully')
             return redirect('admin_portal:home')
         else:
             form = CovidForm()
