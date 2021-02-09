@@ -105,9 +105,9 @@ WSGI_APPLICATION = 'lcstudio_adminportal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nzmkjniw',
-        'USER': 'nzmkjniw',
-        'PASSWORD': 'rfEbALl_arWsuNI-Fy1PyLmA52YVqLQx',
+        'NAME': 'shmqeoea',
+        'USER': 'shmqeoea',
+        'PASSWORD': 'E2YHI_MYUIVsidjUB8BBUec2aS47xDvo',
         'HOST': 'ziggy.db.elephantsql.com',
         'PORT': '5432',
     }
