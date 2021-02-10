@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
 
-from .forms import RegisterUserForm, GeneralUserForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
+from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
+from admin_portal.models import User
 
 
 class Register(View):
@@ -30,7 +31,7 @@ class Register(View):
 
 @login_required
 def profile(request):
-    user_form = GeneralUserForm(instance=request.user)
+    user_form = GeneralUserUpdateForm(instance=request.user)
     if request.method == "GET":
         if additional_forms(request)[1]:
             context = {
@@ -45,7 +46,8 @@ def profile(request):
         return render(request, 'profile.html', context=context)
 
     if request.method == 'POST':
-        user_form = GeneralUserForm(request.POST, instance=request.user)
+        user_form = GeneralUserUpdateForm(request.POST, request.FILES, instance=request.user)
+        # print(user_form)
         if user_form.is_valid():
             user_form.save()
 

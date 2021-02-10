@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
 
 
 # Custom Account manager
@@ -61,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # signup fields
     image = models.ImageField(
-        null=True, blank=True, default="profile_pictures/default.png", upload_to='profile_pictures/')
+        null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     # Employee identification
@@ -105,6 +106,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.user_name
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
 
 
 class LifeChoicesMember(models.Model):

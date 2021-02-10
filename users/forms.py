@@ -12,13 +12,16 @@ class RegisterUserForm(UserCreationForm):
                   'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'roles']
 
 
-class GeneralUserForm(forms.ModelForm):
+class GeneralUserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = ('is_staff', 'is_active', 'last_login', 'group', 'roles', 'groups', 'is_superuser', 'password',
                    'user_permissions', 'date_joined')
         fields = "__all__"
-        lookup_field = "id"
+
+        def update(self, instance, validated_data):
+            instance.save()
+            return instance
 
 
 class LifeChoicesForm(forms.ModelForm):
