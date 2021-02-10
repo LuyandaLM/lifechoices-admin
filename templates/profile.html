@@ -4,8 +4,8 @@
 <form method="POST" enctype="multipart/form-data">
              {% csrf_token %}
     {{ form|crispy }}
-<!--    {{ life_choices_form|crispy }}-->
-<!--    {{ formset|crispy }}-->
+    {{ life_choices_form|crispy }}
+    {{ formset|crispy }}
     <div class="form-group">
         <button class="btn btn-outline-info" type="submit">UPDATE</button>
     </div>

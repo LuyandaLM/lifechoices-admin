@@ -107,7 +107,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.user_name
 
-    def save(self):
+    def save(self, *args, **kwargs):
         super().save()
 
         img = Image.open(self.image.path)
@@ -121,8 +121,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 class LifeChoicesMember(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ID_number = models.IntegerField(null=False, blank=False)
-    chronic_condition = models.CharField(max_length=50)
-    allergies = models.CharField(max_length=50)
+    chronic_condition = models.CharField(max_length=50, null=False, blank=False)
+    allergies = models.CharField(max_length=50, null=False, blank=False)
 
 
 # life-choice members
@@ -135,14 +135,13 @@ class LifeChoicesAcademy(models.Model):
 class LifeChoicesStuff(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
     # Banking details
-    bank_name = models.CharField(max_length=50)
-    account_holder_name = models.CharField(max_length=50)
-    account_number = models.CharField(max_length=50)
-    branch_name = models.CharField(max_length=50)
-    branch_number = models.CharField(max_length=50)
+    bank_name = models.CharField(max_length=50, null=False, blank=False)
+    account_holder_name = models.CharField(max_length=50, null=False, blank=False)
+    account_number = models.CharField(max_length=50, null=False, blank=False)
+    branch_name = models.CharField(max_length=50, null=False, blank=False)
+    branch_number = models.CharField(max_length=50, null=False, blank=False)
     # chronic illness and allergies
-    WorkPermit_number = models.CharField(
-        max_length=25, null=False, blank=False)
+    WorkPermit_number = models.CharField(max_length=25, null=False, blank=False)
     tax_number = models.CharField(max_length=25, null=False, blank=False)
 
 

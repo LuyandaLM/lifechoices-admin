@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
-from admin_portal.models import User
+from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
 
 
 class Register(View):
@@ -50,23 +50,22 @@ def profile(request):
         # print(user_form)
         if user_form.is_valid():
             user_form.save()
-
+            if request.user.roles != "visitor":
+                life_choices_form = LifeChoicesForm(request.POST, instance=request.user)
+                if request.user.roles == "student":
+                    formset = StaffUpdateForm(instance=request.user)
+                elif request.user.roles == "staff" or "business_unit":
+                    formset = StudentUpdateForm(instance=request.user)
+                if life_choices_form.is_valid():
+                    print("im valid")
+                if formset.is_valid():
+                    print("im valid")
+            if additional_forms(request):
+                print("love")
         # if user_form.is_valid() and formset.is_valid() and life_choices_form.is_valid():
         #     print("all forms are valid")
         else:
             print("this is user_form errors ")
-            # print(user_form)
-
-    #     u_form = SimpleUserForm(request.POST, instance=request.user)
-    #     p_form = AdminForm(request.POST, instance=request.user)
-    #     if request.user in Intern.objects.all():
-    #         p_form = InternUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-    #     elif request.user in Partner.objects.all():
-    #         p_form = PartnerForm(request.POST, request.FILES, instance=request.user.profile)
-    #     if u_form.is_valid() and p_form.is_valid():
-    #         u_form.save()
-    #         p_form.save()
-    #         messages.success(request, f'Your Account Has Been Updated!')
         return redirect('users:profile')
     # else:
     #     form = SimpleUserForm(instance=request.user)
@@ -76,6 +75,7 @@ def profile(request):
 def additional_forms(request):
     life_choices_form = LifeChoicesForm(instance=request.user)
     if request.user.roles == 'business_unit' or 'staff':
+        print()
         formset = StaffUpdateForm(instance=request.user)
     elif request.user.roles == 'student':
         formset = StudentUpdateForm(instance=request.user)
