@@ -34,7 +34,7 @@ class CovidQuestionnairePage(View):
         form = CovidForm(request.POST)
         if form.is_valid():
             user = request.user
-            covid_questionnaire = CovidQuestionnaire(user=user, temperature=form.cleaned_data['temperature'],
+            covid_questionnaire = CovidQuestionnaire(user=user.id, temperature=form.cleaned_data['temperature'],
                                                      Shortness_of_breath=form.cleaned_data['Shortness_of_breath'],
                                                      sore_throat=form.cleaned_data['sore_throat'],
                                                      loss_of_taste_or_smell=form.cleaned_data['loss_of_taste_or_smell'],
