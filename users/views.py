@@ -66,6 +66,7 @@ def profile(request):
 
 def additional_forms(request):
     life_choices_form = LifeChoicesForm(instance=request.user)
+    print(life_choices_form)
     if request.user.roles == 'business_unit' or 'staff':
         formset = StaffUpdateForm(instance=request.user)
     elif request.user.roles == 'student':
