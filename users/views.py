@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.models import Group
 
 from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
@@ -25,7 +26,6 @@ class Register(View):
             messages.success(request, f'{username} your account has been created! You are now able to log in')
             return redirect('users:login')
         else:
-            form = RegisterUserForm()
             return render(request, self.template_name, {'form': form})
 
 
@@ -47,36 +47,60 @@ def profile(request):
 
     if request.method == 'POST':
         user_form = GeneralUserUpdateForm(request.POST, request.FILES, instance=request.user)
-        # print(user_form)
         if user_form.is_valid():
             user_form.save()
             if request.user.roles != "visitor":
                 life_choices_form = LifeChoicesForm(request.POST, instance=request.user)
                 if request.user.roles == "student":
-                    formset = StaffUpdateForm(instance=request.user)
-                elif request.user.roles == "staff" or "business_unit":
                     formset = StudentUpdateForm(instance=request.user)
-                if life_choices_form.is_valid():
-                    print("im valid")
-                if formset.is_valid():
-                    print("im valid")
-            if additional_forms(request):
-                print("love")
-        # if user_form.is_valid() and formset.is_valid() and life_choices_form.is_valid():
-        #     print("all forms are valid")
+                elif request.user.roles == "staff" or "business_unit":
+                    formset = StaffUpdateForm(instance=request.user)
+                if life_choices_form.is_valid() and formset.is_valid():
+                    life_choices_form.save()
+                    formset.save()
+            messages.success(request, f'account update successfully')
         else:
             print("this is user_form errors ")
         return redirect('users:profile')
-    # else:
-    #     form = SimpleUserForm(instance=request.user)
-    #
 
 
 def additional_forms(request):
     life_choices_form = LifeChoicesForm(instance=request.user)
     if request.user.roles == 'business_unit' or 'staff':
-        print()
         formset = StaffUpdateForm(instance=request.user)
     elif request.user.roles == 'student':
         formset = StudentUpdateForm(instance=request.user)
     return life_choices_form, formset
+
+
+class PendingAccounts(ListView):
+    template_name = "pending_accounts.html"
+    model = User
+    queryset = User.objects.filter(is_active=False)
+    context_object_name = "accounts"
+
+
+class ActivatePendingAccount(DetailView):
+    template_name = "account.html"
+    queryset = User.objects.all()
+    context_object_name = "user"
+
+
+def activate_account(request, pk):
+    user = User.objects.filter(pk=pk).first()
+    user.is_active = True
+    user.save()
+    member = LifeChoicesMember.objects.create(user=user)
+    if user.roles == 'business_unit' or 'staff':
+        if user.roles == 'business_unit':
+            group = Group.objects.get(name='business_unit')
+        elif user.roles == 'staff':
+            group = Group.objects.get(name='staff')
+        LifeChoicesStuff.objects.create(user=member)
+    elif user.roles == 'student':
+        group = Group.objects.get(name='student')
+        LifeChoicesAcademy.objects.get_or_create(user=member)
+    user.groups.add(group)
+    user.save()
+    messages.success(request, f"{user.user_name}'s account activated successfully")
+    return redirect('users:pending-accounts')

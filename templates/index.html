@@ -5,7 +5,7 @@
     <div class="container-fluid">
        <h1>Hey, {{ user.user_name }}</h1>
     <div id="NotificationBox">
-        <div class="notification-item">You have 7 new messages</div>
+        <div class="notification-item">You have 7 new messages<a href="{% url 'users:pending-accounts' %}">pending accounts</a></div>
         <div class="notification-item">You have 7 new messages</div>
         <div class="notification-item">You have 7 new messages</div>
     </div>

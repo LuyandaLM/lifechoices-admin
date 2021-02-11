@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container bg-light px-5">
+        <div class='row'>
+            <div class="col-12">
+                <h1 class=" accpend">Account Pending</h1>
+            </div>
+        
+            <div class="col-12">
+                <h2 class='py-3 accreq'>{{ user.first_name }} {{ user.last_name }} has
+                        requested to create an
+                        Account.
+                </h2>
+            </div>
+        
+            <div class="col-12">
+                <span class=''>Please verify the information entered is
+                    correct before approving the account.</span>
+            </div>        
+        </div>
+        <div class="row">
+				<div class="container">
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Username</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.user_name }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Email</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.email }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> FirstName</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.first_name }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> LastName</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.last_name }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Gender</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.gender }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Date of Birth</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.date_of_birth }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Marital Status</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.marital_status }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Nationality</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.nationality }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Address</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.address }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Telephone Number</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.telephone_number }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Roles</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.roles }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Next of Kin Name</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info"> {{ user.next_of_kin_name }}</span>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Next of Kin Relationship</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info">
+								{{ user.next_of_kin_relationship }}</span
+							>
+						</div>
+					</div>
+					<div class="row pt-3">
+						<div class="col-6">
+							<span class="account-label"> Next of Kin Contact Number</span>
+						</div>
+						<div class="col-6">
+							<span class="account-info">
+								{{ user.next_of_kin_contact_number }}</span
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+            <div class="row py-3">
+                <div class='col-12 pb-3'>
+                    <a type="button" class='btn col-12 btn-secondary editinfo' href="#">Edit Info</a>
+                </div>
+                <div class="col-6">
+                    <a type="button"class='btn btn-dark form-control declinebtn' href="#">Decline</a>
+                </div>
+                <div class="col-6">
+                    <a type="button" class='btn btn-success form-control approvebtn' href="{% url 'users:activate-account' user.id %}">Approve</a>
+                </div>                           
+            </div>
+    </div>
+    
+
+{% endblock content %}

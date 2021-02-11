@@ -7,3 +7,4 @@ admin.site.register(LeaveApplication)
 admin.site.register(LifeChoicesMember)
 admin.site.register(LifeChoicesAcademy)
 admin.site.register(LifeChoicesStuff)
+# admin.site.site_header = "Administration"

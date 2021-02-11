@@ -120,29 +120,38 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class LifeChoicesMember(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ID_number = models.IntegerField(null=False, blank=False)
-    chronic_condition = models.CharField(max_length=50, null=False, blank=False)
-    allergies = models.CharField(max_length=50, null=False, blank=False)
+    ID_number = models.IntegerField(null=True, blank=False)
+    chronic_condition = models.CharField(max_length=50, null=True, blank=False)
+    allergies = models.CharField(max_length=50, null=True, blank=False)
+
+    def __str__(self):
+        return self.user.user_name
 
 
 # life-choice members
 class LifeChoicesAcademy(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
-    student_number = models.CharField(max_length=13, null=False, blank=False)
+    student_number = models.CharField(max_length=13, null=True, blank=False)
+
+    def __str__(self):
+        return self.user.user.user_name
 
 
 # life choices stuff
 class LifeChoicesStuff(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
     # Banking details
-    bank_name = models.CharField(max_length=50, null=False, blank=False)
-    account_holder_name = models.CharField(max_length=50, null=False, blank=False)
-    account_number = models.CharField(max_length=50, null=False, blank=False)
-    branch_name = models.CharField(max_length=50, null=False, blank=False)
-    branch_number = models.CharField(max_length=50, null=False, blank=False)
+    bank_name = models.CharField(max_length=50, null=True, blank=False)
+    account_holder_name = models.CharField(max_length=50, null=True, blank=False)
+    account_number = models.CharField(max_length=50, null=True, blank=False)
+    branch_name = models.CharField(max_length=50, null=True, blank=False)
+    branch_number = models.CharField(max_length=50, null=True, blank=False)
     # chronic illness and allergies
-    WorkPermit_number = models.CharField(max_length=25, null=False, blank=False)
-    tax_number = models.CharField(max_length=25, null=False, blank=False)
+    WorkPermit_number = models.CharField(max_length=25, null=True, blank=False)
+    tax_number = models.CharField(max_length=25, null=True, blank=False)
+
+    def __str__(self):
+        return self.user.user.user_name
 
 
 # Covid Questionnaires

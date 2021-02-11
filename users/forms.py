@@ -1,15 +1,33 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth.models import Group
 
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
 
 
 class RegisterUserForm(UserCreationForm):
+    """
+    registering all the users that would like to use our account
+    """
 
     class Meta:
         model = User
         fields = ['email', 'user_name', 'first_name', 'last_name', 'gender', 'date_of_birth', 'cell_number',
                   'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'roles']
+
+    def save(self, commit=True):
+        """
+        activate the account if the registering user is a visitor
+        :param commit: standarded
+        :return: the user's account activated or not activated
+        """
+        user = super().save(commit=False)
+        if self.cleaned_data["roles"] == "visitor":
+            group = Group.objects.get(name='visitor')
+            user.groups.add(group)
+            user.is_active = True
+        user.save()
+        return user
 
 
 class GeneralUserUpdateForm(forms.ModelForm):
@@ -31,7 +49,7 @@ class LifeChoicesForm(forms.ModelForm):
         fields = "__all__"
 
 
-class StudentUpdateForm(LifeChoicesForm):
+class StudentUpdateForm(forms.ModelForm):
 
     class Meta:
         model = LifeChoicesAcademy
@@ -39,7 +57,7 @@ class StudentUpdateForm(LifeChoicesForm):
         fields = "__all__"
 
 
-class StaffUpdateForm(LifeChoicesForm):
+class StaffUpdateForm(forms.ModelForm):
 
     class Meta:
         model = LifeChoicesStuff

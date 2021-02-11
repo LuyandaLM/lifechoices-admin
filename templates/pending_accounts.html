@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class='row'>
+            <div class="col-12 pb-3">
+                <h1 class=" accpend">Account Pending</h1>
+            </div>
+        </div>
+        {% if accounts %}
+        <div class='row '>
+            {% for account in accounts %}
+            <div class='pending-accounts form-group col-12 py-2'>
+                <span class='acc-Names'>{{ account.first_name }}</span>
+                <a class='float-right review'href="{% url 'users:activate-pending-accounts' account.id %}">review</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div clas='row'>
+            <div class='pending-accounts col-12  py-2 centered' align="center">
+                <span class='acc-Names '>No Accounts Pending</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>    
+{% endblock content %}
