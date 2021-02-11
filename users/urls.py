@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('pending-accounts/', PendingAccounts.as_view(), name='pending-accounts'),
     path('pending-accounts/<int:pk>', ActivatePendingAccount.as_view(), name='activate-pending-accounts'),
-    path('activate-account/<int:pk>', activate_account, name='activate-account')
+    path('activate-account/<int:pk>', activate_account, name='activate-account'),
+
 ]
 

@@ -14,6 +14,7 @@ import dj_database_url
 from pathlib import Path
 import os
 import django_heroku
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +25,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '408e440a55d2731824a570e3d5c59e5f3df15ecfa8cf1612'
+SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -55,7 +56,6 @@ INSTALLED_APPS = [
     'admin_portal',
     'users',
 ]
-# eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEyMzYwNTkzLCJqdGkiOiIzM2RhYzU3YTYwZDU0M2ExYTE0ODcwMGFmNTg3MDBkZSIsInVzZXJfaWQiOjEsImVtYWlsIjoibG9ud2Fiby1kZXZAZ21haWwuY29tIn0.7ZPr9FWZjm5waXII2cu3MK0odKxMeJyEYcSt_ccfShg
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -107,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shmqeoea',
         'USER': 'shmqeoea',
-        'PASSWORD': 'E2YHI_MYUIVsidjUB8BBUec2aS47xDvo',
+        'PASSWORD': config("LCS_ADMIN_PORTAL_DB_PASSWORD"),
         'HOST': 'ziggy.db.elephantsql.com',
         'PORT': '5432',
     }
@@ -161,5 +161,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/user/login'
 
 AUTH_USER_MODEL = "admin_portal.User"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("LCS_ADMIN_PORTAL_GMAIL_USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("LCS_ADMIN_PORTAL_GMAIL_PASSWORD")
 
 django_heroku.settings(locals())
