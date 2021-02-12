@@ -96,6 +96,7 @@ def activate_account(request, pk):
     user.is_active = True
     user.save()
     member = LifeChoicesMember.objects.create(user=user)
+    group = None
     if user.roles == 'business_unit' or 'staff':
         if user.roles == 'business_unit':
             group = Group.objects.get(name='business_unit')

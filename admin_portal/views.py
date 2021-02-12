@@ -16,8 +16,8 @@ class HomePageView(View):
         if not covid_questionnaire_completed(request.user.id):
             messages.success(request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
             return redirect('admin_portal:covid-questionnaire')
-        if request.user.roles == 'visitor':
-            return redirect('https://www.lifechoices.co.za/')
+        # if request.user.roles == 'visitor':
+        #     return redirect('https://www.lifechoices.co.za/')
         return render(request, self.template_name)
 
     def get_context_data(self, **kwargs):
