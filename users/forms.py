@@ -23,8 +23,6 @@ class RegisterUserForm(UserCreationForm):
         """
         user = super().save(commit=False)
         if self.cleaned_data["roles"] == "visitor":
-            group = Group.objects.get(name='visitor')
-            user.groups.add(group)
             user.is_active = True
         user.save()
         return user

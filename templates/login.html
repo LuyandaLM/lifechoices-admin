@@ -16,7 +16,15 @@
     <div class="form-group">
       Don't have an account <a href="{% url 'users:register' %}">REGISTER</a>
     </div>
-  <button class="btn btn-primary" type="submit">Login</button>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">Login</button>
+    <small class="text-muted ml-2">
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+    </small>
+<!--    password_reset-->
+  </div>
+
+
 </form>
 
 {% endblock %}

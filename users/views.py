@@ -22,6 +22,11 @@ class Register(View):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
+            if form.cleaned_data["roles"] == "visitor":
+                group = Group.objects.get(name='visitor')
+                user = User.objects.filter(email=form.cleaned_data["email"]).first()
+                user.groups.add(group)
+
             username = form.cleaned_data.get('username')
             messages.success(request, f'{username} your account has been created! You are now able to log in')
             return redirect('users:login')
@@ -66,7 +71,6 @@ def profile(request):
 
 def additional_forms(request):
     life_choices_form = LifeChoicesForm(instance=request.user)
-    print(life_choices_form)
     if request.user.roles == 'business_unit' or 'staff':
         formset = StaffUpdateForm(instance=request.user)
     elif request.user.roles == 'student':
