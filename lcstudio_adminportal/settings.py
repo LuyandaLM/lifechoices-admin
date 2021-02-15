@@ -174,8 +174,8 @@ EMAIL_HOST_PASSWORD = os.environ.get("LCS_ADMIN_PORTAL_GMAIL_PASSWORD")
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_LOCATION = 'media'
+AWS_S3_CUSTOM_DOMAIN = "https://lifechoices-adminportal-files.s3.us-east-2.amazonaws.com/"
+AWS_LOCATION = 'profile_pictures/'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
