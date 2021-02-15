@@ -5,7 +5,7 @@ from django.views.generic import View
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesStuff, LifeChoicesAcademy
 from .forms import CovidForm
 
 
@@ -21,7 +21,7 @@ class HomePageView(View):
         return render(request, self.template_name)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(self).get_context_data(**kwargs)
         context['pending_accounts'] = User.objects.filter(is_active=False)
         print(context)
         return context
@@ -67,10 +67,22 @@ def covid_questionnaire_completed(user_id):
 
 
 class LeaveApplicationPage(View):
-    form_class = CovidForm
     initial = {'key': 'value'}
-    template_name = "covid_questionnaire.html"
+    template_name = "request_leave.html"
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        member = LifeChoicesMember.objects.filter(user=request.user).first()
+        user = LifeChoicesStuff.objects.filter(user=member).first()
+        leave_type = request.POST.getlist("leave")[0]
+        start_date = request.POST.getlist("start_date")[0]
+        end_date = request.POST.getlist("end_date")[0]
+        message = request.POST.getlist("message")[0]
+        file = request.POST.getlist("file")
+        leave = LeaveApplication(user=user, category=leave_type, personal_message=message, leave_date_from=start_date,
+                                 leave_date_to=end_date)
+        leave.save()
+        return render(request, self.template_name)

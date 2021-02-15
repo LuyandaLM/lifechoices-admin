@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <h1>Leave Days</h1>
+    <h3>Leave Used</h3>
+    <div id="LeaveUsed" class="LeaveDiv">
+        <div class="leave-item">
+            <h3>5</h3>
+            <p>Sick Days</p>
+        </div>
+        <div class="leave-item">
+            <h3>15</h3>
+            <p>Annual Days</p>
+        </div>
+        <div class="leave-item">
+            <h3>3</h3>
+            <p>Other Days</p>
+        </div>
+    </div>
+    <h3>Leave Available</h3>
+    <div id="LeaveAvailable" class="LeaveDiv">
+        <div class="leave-item">
+            <h3>7</h3>
+            <p>Annual Days</p>
+        </div>
+    </div>
+    <div id="LeaveBtns">
+        <div id="CalendarBtn" class="leaveBtn">
+            view calendar
+        </div>
+    </div>
+        </div>
+   <form method="POST" class="col-12 col-lg-6 pt-5">
+       {% csrf_token %}
+       <fieldset class="form-group">
+                <legend class="border-bottom mb-4"><h3>Request Leave</h3></legend>
+        <div class="form-group">
+            <select name="leave" class="form-control">
+            <option hidden disabled selected>select leave type</option>
+            <option>Sick Leave</option>
+            <option>Annual Leave</option>
+            <option>Study Leave</option>
+            <option>Family Responsibility Leave</option>
+            <option>Compensation Leave</option>
+            <option>Unpaid Leave</option>
+            <option>Other</option>
+        </select>
+        </div>
+       <div class="form-group">
+           <h6>Start Date</h6>
+            <input type="date" id="StartDate" class="form-control" name="start_date">
+       </div>
+       <div class="form-group">
+           <h6>End Date</h6>
+            <input type="date" id="EndDate" class="form-control" name="end_date"><br/>
+       </div>
+       <div class="form-group">
+           <textarea placeholder="Enter details if required" class="form-control" name="message"></textarea><br/>
+       </div>
+       <div class="form-group">
+            <input type="file" class="form-control" name="file">
+       </div>
+       <button id="SubmitButton">submit</button>
+        </fieldset>
+   </form>
+
+</div>
+</div>
+{% endblock content %}
