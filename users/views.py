@@ -57,9 +57,9 @@ def profile(request):
             if request.user.roles != "visitor":
                 life_choices_form = LifeChoicesForm(request.POST, instance=request.user)
                 if request.user.roles == "student":
-                    formset = StudentUpdateForm(instance=request.user)
+                    formset = StudentUpdateForm(request.POST, instance=request.user)
                 elif request.user.roles == "staff" or "business_unit":
-                    formset = StaffUpdateForm(instance=request.user)
+                    formset = StaffUpdateForm(request.POST, instance=request.user)
                 if life_choices_form.is_valid() and formset.is_valid():
                     life_choices_form.save()
                     formset.save()
@@ -70,9 +70,12 @@ def profile(request):
 
 
 def additional_forms(request):
-    life_choices_form = LifeChoicesForm(instance=request.user)
+    formset = None
+    member = LifeChoicesMember.objects.filter(user=request.user).first()
+    life_choices_form = LifeChoicesForm(instance=member)
     if request.user.roles == 'business_unit' or 'staff':
-        formset = StaffUpdateForm(instance=request.user)
+        instance = LifeChoicesStuff.objects.filter(user=member).first()
+        formset = StaffUpdateForm(instance=instance)
     elif request.user.roles == 'student':
         formset = StudentUpdateForm(instance=request.user)
     return life_choices_form, formset

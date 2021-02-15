@@ -6,7 +6,7 @@
        <h1>Hey, {{ user.user_name }}</h1>
     <div id="NotificationBox">
         {{ pending_accounts }}
-        <div class="notification-item">You have 7 new messages<a href="{% url 'users:pending-accounts' %}">pending accounts</a></div>
+        <a href="{% url 'users:pending-accounts' %}"><div class="notification-item">You have 7 new messages</div></a>
         <div class="notification-item">You have 7 new messages</div>
         <div class="notification-item">You have 7 new messages</div>
     </div>
