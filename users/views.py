@@ -98,6 +98,12 @@ def activate_account(request, pk):
     user = User.objects.filter(pk=pk).first()
     user.is_active = True
     user.save()
+    messages.success(request, f"{user.user_name}'s account activated successfully")
+    add_user_to_group(user)
+    return redirect('users:pending-accounts')
+
+
+def add_user_to_group(user):
     member = LifeChoicesMember.objects.create(user=user)
     group = None
     if user.roles == 'business_unit' or 'staff':
@@ -111,5 +117,3 @@ def activate_account(request, pk):
         LifeChoicesAcademy.objects.get_or_create(user=member)
     user.groups.add(group)
     user.save()
-    messages.success(request, f"{user.user_name}'s account activated successfully")
-    return redirect('users:pending-accounts')
