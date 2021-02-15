@@ -179,6 +179,10 @@ AWS_LOCATION = 'profile_pictures/'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'mysite/static'),
 ]
