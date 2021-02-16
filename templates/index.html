@@ -5,14 +5,14 @@
     <div class="container-fluid">
        <h1>Hey, {{ user.user_name }}</h1>
     <div id="NotificationBox">
-        {% if pending_accounts.count > 0 %}
-            <a href="{% url 'users:pending-accounts' %}"><div class="notification-item">{{ pending_accounts.count }} Pending accounts</div></a>
+        {% if user.roles == 'business_unit' %}
+            {% if pending_accounts.count > 0 %}
+                <a href="{% url 'users:pending-accounts' %}"><div class="notification-item">{{ pending_accounts.count }} Pending accounts</div></a>
+            {% endif %}
+            {% if leaves_applications.count > 0 %}
+                <a href="{% url 'admin_portal:home' %}"><div class="notification-item">{{ leaves_applications.count }} Pending Leaves</div></a>
+            {% endif %}
         {% endif %}
-        {% if leaves_applications.count > 0 %}
-            <a href="{% url 'admin_portal:home' %}"><div class="notification-item">{{ leaves_applications.count }} Pending Leaves</div></a>
-        {% endif %}
-
-
         <div class="notification-item">You have 7 new messages</div>
     </div>
     <div id="NavigationBox" class="row gutter">
