@@ -18,13 +18,11 @@ class HomePageView(View):
             return redirect('admin_portal:covid-questionnaire')
         # if request.user.roles == 'visitor':
         #     return redirect('https://www.lifechoices.co.za/')
-        return render(request, self.template_name)
-
-    def get_context_data(self, **kwargs):
-        context = super(self).get_context_data(**kwargs)
-        context['pending_accounts'] = User.objects.filter(is_active=False)
-        print(context)
-        return context
+        context = {
+            'pending_accounts': User.objects.filter(is_active=False),
+            'leaves_applications': LeaveApplication.objects.all()
+        }
+        return render(request, self.template_name, context=context)
 
 
 class CovidQuestionnairePage(View):
