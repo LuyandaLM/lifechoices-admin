@@ -180,7 +180,7 @@ h1{
 }
 
 .account-info {
-	color: gray;
+	color: white;
 }
 
 .messages li{
@@ -389,3 +389,7 @@ textarea{
 .chattextr {
 	text-align: right;
 }
+.accountcolor {
+background-color: rgb(31, 30, 30, 0.3);
+}
+
