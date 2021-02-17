@@ -92,6 +92,9 @@ class PendingLeaveApplicationPage(ListView):
     queryset = LeaveApplication.objects.all()
     context_object_name = "leave_applications"
 
-    # def get(self, request, *args, **kwargs):
-    #     # form = self.form_class(initial=self.initial)
-    #     return render(request, self.template_name)
+
+class chatPageView(View):
+    template_name = "chat.html"
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)

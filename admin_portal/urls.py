@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage
+from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage, chatPageView
 
 
 app_name = 'admin_portal'
@@ -12,4 +12,5 @@ urlpatterns = [
     path('leave-application/', LeaveApplicationPage.as_view(), name='leave-application'),
     path('pending-leave-applications/', PendingLeaveApplicationPage.as_view(), name='pending-leaves'),
     path('api/', include('admin_portal.api.urls'))
+    path('chat/', chatPageView.as_view(), name='chat'),
 ]
