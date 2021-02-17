@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     # local apps
     'admin_portal',
     'users',
-    'chatroom'
 ]
 
 REST_FRAMEWORK = {
@@ -113,16 +112,6 @@ DATABASES = {
         'HOST': 'ziggy.db.elephantsql.com',
         'PORT': '5432',
     }
-}
-
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "host": [('127.0.0.1', 6379)]
-        }
-    },
 }
 
 
