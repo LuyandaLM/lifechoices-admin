@@ -361,3 +361,31 @@ textarea{
     padding: 5px 50px;
     border: none;
 }
+/*Chat*/
+.chathead {
+	background-color: #545454;
+	color: white;
+}
+
+.messagebox {
+	background-color: rgb(31, 30, 30, 0.6);
+	border-radius: 20px;
+	color: white;
+}
+/*.chatbackground {
+	background-image: url("Img/mesg2.jpg ");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 100vw;
+}*/
+.chatImg {
+	height: 50px;
+	width: 50px;
+	border-radius: 50px;
+}
+
+.chattextr {
+	text-align: right;
+}

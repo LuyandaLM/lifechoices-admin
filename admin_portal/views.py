@@ -84,3 +84,9 @@ class LeaveApplicationPage(View):
                                  leave_date_to=end_date)
         leave.save()
         return render(request, self.template_name)
+
+class chatPageView(View):
+    template_name = "chat.html"
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)

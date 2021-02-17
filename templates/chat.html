@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<div class="mw-100  chatbackground">
+			<div class=" mw-100 chathead py-3">
+				<div class='row  '>
+					<div class="col-5">Lonwabo Mdazuka</div>
+					<div class="col-6">
+                        <a href="/">
+						<button type="button" class="close"  aria-label="Close">
+							<span style="color:white" aria-hidden="true">&times;</span>
+						</button></a>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="col-12">Lc Studio - RPA Team Lead</div>
+                </div>				
+			</div>
+            <div class="container pt-3">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-start pb-3">
+					<div class="pr-1"><img  class='chatImg'src="{% static '/Img/guy-hoodie.jpg' %}"alt="pic" /></div>
+                    <span class=" col-5 messagebox py-3"> 
+                        Hey, How are you?
+                    </span>  
+                </div>
+                <div class="col-12 d-flex justify-content-end py-3">
+					
+                    <span class=" col-5 messagebox py-3 chattextr  "> 
+                        Great, and you?
+                    </span>  <div class="pl-1"><img class='chatImg' src="{% static '/Img/guy-hoodie.jpg' %}" alt="pic" /></div>
+                    
+                </div>
+                <div class="col-12 d-flex justify-content-start py-3">
+					<div class="pr-1 "><img class='chatImg'src="{% static '/Img/guy-hoodie.jpg' %}"alt="pic" /></div>
+                    
+                    <span class=" col-5 messagebox py-3"> 
+                        I'm Fine, Just needed text for this.
+                    </span>  
+                </div>
+
+            </div></div>
+		</div>
+{% endblock content %}
