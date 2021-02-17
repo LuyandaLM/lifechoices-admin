@@ -5,7 +5,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    background-image: url("{% static 'admin_portal/Img/lifechoicesbg.png' %}");
+    background-image: url("Img/lifechoicesbg.png ");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -108,13 +108,6 @@ h1{
     padding-right: 0;
 }
 }
-/*.gutter .col-6{
-    margin-right: 15px;
-}
-.gutter .col-6:nth-last-child(1){
-    margin-right: 0;
-}*/
-
 
 <!--pending account styling-->
 @font-face {
@@ -124,7 +117,7 @@ h1{
 .review,
 .accpend {
 	font-family: 'caveat';
-	color: #abcc37;
+	color: #abcc37 !important;
 }
 .pending-accounts {
 	background-color: #545454;
@@ -153,10 +146,7 @@ h1{
 
 
 <!--account activation styling-->
-@font-face {
-	font-family: caveat;
-	src: url(/Fonts/caveat.regular.ttf);
-}
+
 .accpend {
 	font-family: 'caveat';
 	color: #abcc37;
@@ -195,19 +185,6 @@ h1{
     list-style: none;
 }
 
-body {
-    background: #fff;
-    font-family: 'Epilogue', sans-serif;
-    overflow-x: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    background-image: url("lifechoicesbg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 #Logo{
     height: 40px;
     margin-top: 8px;
@@ -215,7 +192,7 @@ body {
 h1{
     margin: 18px 0 ! important;
     font-family: 'Caveat', cursive;
-    color: #ffffff;
+    color: #abcc37;
     text-shadow: 1px 1px 2px #343a40;
 }
 #UserDropdown{
@@ -263,7 +240,7 @@ h1{
 }
 
 h3{
-    color: #ffffff;
+    color: #abcc37;
     text-shadow: 1px 1px 2px #343a40;
 }
 #NavigationBox .card{
@@ -381,9 +358,3 @@ textarea{
     padding: 5px 50px;
     border: none;
 }
-/*.gutter .col-6{
-    margin-right: 15px;
-}
-.gutter .col-6:nth-last-child(1){
-    margin-right: 0;
-}*/
