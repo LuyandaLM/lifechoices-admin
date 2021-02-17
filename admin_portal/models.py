@@ -175,6 +175,9 @@ class CovidQuestionnaire(models.Model):
 
 # Leave Application
 class LeaveApplication(models.Model):
+    """
+    leave application can only be done by lifechoices stuff and not general and lifechoices members
+    """
     CATEGORY = (
         ('Annual Leave', 'Annual Leave'),
         ('Sick Leave', 'Sick Leave'),
@@ -197,3 +200,14 @@ class LeaveApplication(models.Model):
 
     def __str__(self):
         return f"Leave request by {self.user} from {self.leave_date_from} - {self.leave_date_to}"
+
+
+class CheckIn(models.Model):
+    """
+    the checkin time of the user along with the location they are signing into
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=255, blank=True)
+    time_signed_in = models.DateTimeField(auto_now_add=True)
+
+

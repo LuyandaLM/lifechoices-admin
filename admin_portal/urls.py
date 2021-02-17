@@ -11,6 +11,6 @@ urlpatterns = [
     path('covid-questionnaire/', CovidQuestionnairePage.as_view(), name='covid-questionnaire'),
     path('leave-application/', LeaveApplicationPage.as_view(), name='leave-application'),
     path('pending-leave-applications/', PendingLeaveApplicationPage.as_view(), name='pending-leaves'),
-    path('api/', include('admin_portal.api.urls'))
+    path('api/', include('admin_portal.api.urls')),
     path('chat/', chatPageView.as_view(), name='chat'),
 ]
