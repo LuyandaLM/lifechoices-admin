@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -86,10 +86,12 @@ class LeaveApplicationPage(View):
         return render(request, self.template_name)
 
 
-class PendingLeaveApplicationPage(View):
-    initial = {'key': 'value'}
+class PendingLeaveApplicationPage(ListView):
     template_name = "pending_leave.html"
+    model = LeaveApplication
+    queryset = LeaveApplication.objects.all()
+    context_object_name = "leave_applications"
 
-    def get(self, request, *args, **kwargs):
-        # form = self.form_class(initial=self.initial)
-        return render(request, self.template_name)
+    # def get(self, request, *args, **kwargs):
+    #     # form = self.form_class(initial=self.initial)
+    #     return render(request, self.template_name)

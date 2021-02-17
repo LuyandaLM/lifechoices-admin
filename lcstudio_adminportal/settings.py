@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # local apps
     'admin_portal',
     'users',
+    'chatroom'
 ]
 
 REST_FRAMEWORK = {
@@ -179,6 +180,9 @@ LOGIN_URL = '/user/login'
 
 AUTH_USER_MODEL = "admin_portal.User"
 
+"""
+Email user reset password reset link credintails 
+"""
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -186,6 +190,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config("LCS_ADMIN_PORTAL_GMAIL_USERNAME")
 EMAIL_HOST_PASSWORD = os.environ.get("LCS_ADMIN_PORTAL_GMAIL_PASSWORD")
 
+# AWS storage set up
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")

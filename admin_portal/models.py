@@ -97,8 +97,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     next_of_kin_relationship = models.CharField(max_length=50)
     next_of_kin_contact_number = models.CharField(max_length=15)
 
-    date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(null=True)
+    date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
+    last_login = models.DateTimeField(verbose_name="last login", auto_now=True, null=True)
 
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'

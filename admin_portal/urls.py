@@ -10,6 +10,6 @@ urlpatterns = [
     path('', login_required(HomePageView.as_view()), name='home'),
     path('covid-questionnaire/', CovidQuestionnairePage.as_view(), name='covid-questionnaire'),
     path('leave-application/', LeaveApplicationPage.as_view(), name='leave-application'),
-    path('pending-leave-applications/', LeaveApplicationPage.as_view(), name='pending-accounts'),
+    path('pending-leave-applications/', PendingLeaveApplicationPage.as_view(), name='pending-leaves'),
     path('api/', include('admin_portal.api.urls'))
 ]
