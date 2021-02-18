@@ -414,4 +414,24 @@ color: white;
 color: black;
 background: none;
 }
+/* checkin */
+.covidbtn,
+.checkinbtn {
+	height: 60px;
+	width: 200px;
+	border-radius: 10px;
+	background-color: #abcc37;
+	color: white;
+}
+.checkinbtn {
+}
+.covidbtn {
+	background-color: rgb(171, 204, 55, 0.5);
 
+}
+.checktick {
+	color: #abcc37;
+}
+.checkinbg {
+color: black;
+}
