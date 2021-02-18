@@ -5,7 +5,7 @@
     <div class="container-fluid">
        <h1>Hey, {{ user.user_name }}</h1>
     <div id="NotificationBox">
-        {% if user.roles == 'business_unit' %}
+        {% if user.is_active  %}
             {% if pending_accounts.count > 0 %}
                 <a href="{% url 'users:pending-accounts' %}"><div class="notification-item">{{ pending_accounts.count }} Pending accounts</div></a>
             {% endif %}

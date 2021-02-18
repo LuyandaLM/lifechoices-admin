@@ -90,7 +90,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     roles = models.CharField(max_length=15, choices=role, default="visitor")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    group = models.CharField(max_length=150, null=False, blank=False)
+    is_admin = models.BooleanField(default=False)
+    # group = models.CharField(max_length=150, null=False, blank=False)
 
     # Next of Kin
     next_of_kin_name = models.CharField(max_length=50)
