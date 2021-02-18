@@ -610,7 +610,7 @@ textarea{
           {% if user.roles != 'visitor' %}
           <button class="dropdown-item d-none" type="button">Messages</button>
           <button class="dropdown-item" type="button">Clock In/Out</button>
-          <button class="dropdown-item" type="button"><a class="navbar-brand" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
+          <button class="dropdown-item" type="button"><a class="navdrop" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
           {% endif %}
           <a href="{% url 'users:profile' %}" class="dropdown-item" type="button">Account</a>
           <a href="{% url 'users:logout' %}" class="dropdown-item" type="button">Log Out</a>
