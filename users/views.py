@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 
 from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm, BankingDetailsForm
+from .email_confirmation import activate_email
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
 
 
@@ -132,19 +133,20 @@ def activate_account(request, pk):
     user.save()
     messages.success(
         request, f"{user.user_name}'s account activated successfully")
+    activate_email(True, user.email)
     return redirect('users:pending-accounts')
 
 
 class ViewProfile(View):
     template_name = 'profile/profile.html'
 
-    def get(self):
+    def get(self, request):
         context = {}
         form = BankingDetailsForm()
         context['form'] = form
         return render(self.request, self.template_name, context)
 
-    def post(self):
+    def post(self, request):
         form = BankingDetailsForm(self.request.POST)
         if form.is_valid():
             form.save()
