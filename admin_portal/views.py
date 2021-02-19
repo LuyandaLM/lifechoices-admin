@@ -24,8 +24,6 @@ class HomePageView(View):
             'pending_accounts': User.objects.filter(is_active=False),
             'leaves_applications': LeaveApplication.objects.all()
         }
-        write_to_covid_csv()
-        write_to_user_csv()
         return render(request, self.template_name, context=context)
 
 
