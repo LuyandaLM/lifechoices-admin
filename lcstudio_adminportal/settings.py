@@ -29,7 +29,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG_VALUE')
+print(DEBUG)
 ALLOWED_HOSTS = ["https://lifechoices-admin.herokuapp.com/", "http://127.0.0.1:8000/"]
 # alternative
 
