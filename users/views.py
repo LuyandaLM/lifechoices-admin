@@ -11,18 +11,28 @@ from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, Lif
 
 
 class Register(View):
+    """
+    registration form for new users
+    """
     form_class = RegisterUserForm
     initial = {'key': 'value'}
     template_name = 'register.html'
 
     def get(self, request, *args, **kwargs):
+        """
+        what will be returned when the user requests this page using the link user/register
+        :param request: the request
+        :param args:
+        :param kwargs:
+        :return: the page with the form the user has to complete
+        """
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = RegisterUserForm(request.POST)
+        form = RegisterUserForm(request.POST)   # completed form
         if form.is_valid():
-
+            form.save()
             email = form.cleaned_data["email"]
             username = form.cleaned_data.get('username')
             user = User.objects.filter(email=email).first()
@@ -40,7 +50,7 @@ class Register(View):
             else:
                 group = Group.objects.get(name='student')
                 user.groups.add(group)
-            form.save()
+
             messages.success(
                 request, f'{username} your account has been created! You are now able to log in')
             return redirect('users:login')
