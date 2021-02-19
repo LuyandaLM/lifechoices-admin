@@ -133,7 +133,7 @@ def activate_account(request, pk):
     user.save()
     messages.success(
         request, f"{user.user_name}'s account activated successfully")
-    activate_email(True, user.email)
+    activate_email(user)
     return redirect('users:pending-accounts')
 
 
