@@ -393,3 +393,54 @@ textarea{
 background-color: rgb(31, 30, 30, 0.3);
 }
 
+.navdrop:hover,
+.navdrop {
+text-decoration: none !important;
+color: white;
+}
+/* admin */
+.adminacc,
+.adminleave {
+	background-color: #d9d9d9;
+	border-radius: 10px;
+	/* height: 50px; */
+}
+.adminpen {
+}
+.adminhead {
+	color: #abcc37;
+}
+.adminbg {
+color: black;
+background: none;
+}
+/* checkin */
+.covidbtn,
+.checkinbtn {
+	height: 60px;
+	width: 200px;
+	border-radius: 10px;
+	background-color: #abcc37;
+	color: white;
+}
+.checkinbtn {
+}
+.covidbtn {
+	background-color: rgb(171, 204, 55, 0.5);
+
+}
+.checktick {
+	color: #abcc37;
+}
+.checkinbg {
+color: black;
+}
+/*account profile */
+.profilepic {
+	height: 200px;
+	width: auto;
+	position: center;
+}
+/*.accpro {
+color : black;
+}*/

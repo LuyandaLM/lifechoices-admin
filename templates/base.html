@@ -17,6 +17,31 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+   <script>
+           $('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            // prevent collapse
+            e.stopPropagation();
+        }
+    }
+});
+
+        </script>
+        <script>
+            $('[data-toggle="collapse"]').on('click',function(e){
+     if ( $(this).parents('.accordion1').find('.collapse.show') ){
+         var idx = $(this).index('[data-toggle="collapse"]');
+         if (idx == $('.collapse.show').index('.collapse')) {
+             // prevent collapse
+             e.stopPropagation();
+         }
+     }
+ });
+
+         </script>
+
 <style>
 body {
     background: #fff;
@@ -610,7 +635,7 @@ textarea{
           {% if user.roles != 'visitor' %}
           <button class="dropdown-item d-none" type="button">Messages</button>
           <button class="dropdown-item" type="button">Clock In/Out</button>
-          <button class="dropdown-item" type="button"><a class="navbar-brand" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
+          <button class="dropdown-item" type="button"><a class="navdrop" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
           {% endif %}
           <a href="{% url 'users:viewprofile' %}" class="dropdown-item" type="button">Profile</a>
           <a href="{% url 'users:logout' %}" class="dropdown-item" type="button">Log Out</a>

@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container accpro">
+			<div>
+				<div class="row border-bottom pb-3">
+					<div class="col-6 d-sm-none d-md-block d-none d-sm-block">
+						<div class="row">
+							<img
+								class="profilepic col-md-6 rounded-circle"
+								src="./guy-hoodie.jpg"
+								alt="profilepic"
+							/>
+							<h3 class="col-md-12">Username</h3>
+						</div>
+					</div>
+					<div class="col-6">
+						<form>
+							<div class="row form-group">
+								<label class="col-6"> First name</label>
+								<input disabled class="col-6" placeholder="Mdazukas" />
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Last name</label>
+								<input disabled class="col-6" placeholder="vd merwe" />
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Gender</label>
+								<input disabled class="col-6" placeholder="Male" />
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> ID number</label>
+								<input disabled class="col-6" placeholder="234234234" />
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Date of birth</label>
+								<input disabled class="col-6" placeholder="2020-04-31" />
+							</div>
+						</form>
+					</div>
+				</div>
+				<div id="accordion" class="accordion">
+					<div class="row border-bottom">
+						<div class="col-4">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse1"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse1"
+								style="border: none"
+							>
+								Personal details
+							</a>
+						</div>
+						<div class="col-4">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse2"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse2"
+								style="border: none"
+							>
+								Contact details
+							</a>
+						</div>
+						<div class="col-4">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse3"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse3"
+								style="border: none"
+							>
+								Banking details
+							</a>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="row pt-3">
+							<div class="col-4 collapse  " id="collapse1" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-12"> First name</label>
+										<input class="col-12" placeholder="Mdazukas" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Last name</label>
+										<input class="col-12" placeholder="vd merwe" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Gender</label>
+										<input class="col-12" placeholder="Male" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> ID number</label>
+										<input class="col-12" placeholder="234234234" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Date of birth</label>
+										<input class="col-12" placeholder="2020-04-31" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Martial status</label>
+										<input class="col-12" placeholder="Single" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Nationality</label>
+										<input class="col-12" placeholder="South afirca" />
+									</div>
+									<button class="btn btn-info">Update</button>
+								</form>
+							</div>
+							<div class="col-4 collapse" id="collapse2" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-12"> Email Address</label>
+										<input class="col-12" placeholder="lonwabo@gmail.com" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Telephone number</label>
+										<input class="col-12" placeholder="2343254352" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Cell number</label>
+										<input class="col-12" placeholder="234324234" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Address</label>
+										<input class="col-12" placeholder="314 iman haron" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Permanent telephone number</label>
+										<input class="col-12" placeholder="4234234" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Permanent address</label>
+										<input class="col-12" placeholder="314 iman haron" />
+									</div>
+
+									<button class="btn btn-info">Update</button>
+								</form>
+							</div>
+							<div class="col-4 collapse" id="collapse3" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-12"> Bank name</label>
+										<input class="col-12" placeholder="FNB" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Account holder name</label>
+										<input class="col-12" placeholder="Philani" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Account number</label>
+										<input class="col-12" placeholder="23322332" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Branch name</label>
+										<input class="col-12" placeholder="n1" />
+									</div>
+									<div class="row form-group">
+										<label class="col-12"> Branch number</label>
+										<input class="col-12" placeholder="33423423" />
+									</div>
+
+									<button class="btn btn-info">Update</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <div id="accordion1" class="accordion1">
+			<div class="pt-3">
+				<div class="row border-bottom border-top">
+					<div class="col-4">
+						<a
+							class="btn btndrop"
+							data-toggle="collapse"
+							href="#collapse4"
+                            data-parent="#accordion1"
+							role="button"
+							aria-expanded="false"
+							aria-controls="collapse4"
+							style="border: none; color: white "
+						>
+							Family details
+						</a>
+					</div>
+					<div class="col-4">
+						<a
+							class="btn btndrop"
+							data-toggle="collapse"
+							href="#collapse5"
+                            data-parent="#accordion1"
+							role="button"
+							aria-expanded="false"
+							aria-controls="collapse5"
+							style="border: none; color: white"
+						>
+							Medical details
+						</a>
+					</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-4 collapse" id="collapse4" data-parent="#accordion1">
+						<form>
+							<div class="row form-group">
+								<label class="col-12"> Next of kin name</label>
+								<input class="col-12" placeholder="Tim" />
+							</div>
+							<div class="row form-group">
+								<label class="col-12"> Next of kin relationship</label>
+								<input class="col-12" placeholder="wife" />
+							</div>
+							<div class="row form-group">
+								<label class="col-12"> Next of kin contact number</label>
+								<input class="col-12" placeholder="93949944" />
+							</div>
+							<button class="btn btn-info">Update</button>
+						</form>
+					</div>
+					<div class="col-4 collapse" id="collapse5" data-parent="#accordion1">
+						<form>
+							<div class="row form-group">
+								<label class="col-12"> Chronic condition</label>
+								<input class="col-12" placeholder="None" />
+							</div>
+							<div class="row form-group">
+								<label class="col-12"> Allergies</label>
+								<input class="col-12" placeholder="None" />
+							</div>
+							<button class="btn btn-info">Update</button >
+						</form>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		</div>
+{% endblock content %}
