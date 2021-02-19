@@ -30,11 +30,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-# ALLOWED_HOSTS = [
-# "lcstudioadminportal-backend.herokuapp.com", "http://127.0.0.1"]
+ALLOWED_HOSTS = ["https://lcstudioadminportal-backend.herokuapp.com", "http://127.0.0.1:8000/"]
 # alternative
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'lcstudio_adminportal.urls'
