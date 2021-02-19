@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 
-from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm
+from .forms import RegisterUserForm, GeneralUserUpdateForm, StaffUpdateForm, StudentUpdateForm, LifeChoicesForm, BankingDetailsForm
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
 
 
@@ -21,14 +21,27 @@ class Register(View):
     def post(self, request, *args, **kwargs):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            if form.cleaned_data["roles"] == "visitor":
-                group = Group.objects.get(name='visitor')
-                user = User.objects.filter(email=form.cleaned_data["email"]).first()
-                user.groups.add(group)
 
+            email = form.cleaned_data["email"]
             username = form.cleaned_data.get('username')
-            messages.success(request, f'{username} your account has been created! You are now able to log in')
+            user = User.objects.filter(email=email).first()
+            role = form.cleaned_data["roles"]
+            # add groups to user
+            if role == "visitor":
+                group = Group.objects.get(name='visitor')
+                user.groups.add(group)
+            elif role == 'business_unit':
+                group = Group.objects.get(name='business_unit')
+                user.groups.add(group)
+            elif role == '	staff':
+                group = Group.objects.get(name='staff')
+                user.groups.add(group)
+            else:
+                group = Group.objects.get(name='student')
+                user.groups.add(group)
+            form.save()
+            messages.success(
+                request, f'{username} your account has been created! You are now able to log in')
             return redirect('users:login')
         else:
             return render(request, self.template_name, {'form': form})
@@ -36,7 +49,18 @@ class Register(View):
 
 @login_required
 def profile(request):
-    user_form = GeneralUserUpdateForm(instance=request.user)
+    user = request.user
+    # load form specific to user
+    user_form = GeneralUserUpdateForm(instance=user)
+    if user.groups.filter(name='visitor').exists():
+        user_form = GeneralUserUpdateForm(instance=user)
+    elif user.groups.filter(name='business_unit').exists():
+        user_form = StaffUpdateForm(instance=user)
+    elif user.groups.filter(name='staff').exists():
+        user_form = StaffUpdateForm(instance=user)
+    elif user.groups.filter(name='student').exists():
+        user_form = StudentUpdateForm(instance=user)
+
     if request.method == "GET":
         if additional_forms(request)[1]:
             context = {
@@ -51,21 +75,29 @@ def profile(request):
         return render(request, 'profile.html', context=context)
 
     if request.method == 'POST':
-        user_form = GeneralUserUpdateForm(request.POST, request.FILES, instance=request.user)
-        if user_form.is_valid():
-            user_form.save()
-            if request.user.roles != "visitor":
-                life_choices_form = LifeChoicesForm(request.POST, instance=request.user)
-                if request.user.roles == "student":
-                    formset = StudentUpdateForm(request.POST, instance=request.user)
-                elif request.user.roles == "staff" or "business_unit":
-                    formset = StaffUpdateForm(request.POST, instance=request.user)
-                if life_choices_form.is_valid() and formset.is_valid():
-                    life_choices_form.save()
-                    formset.save()
-            messages.success(request, f'account update successfully')
-        else:
-            print("this is user_form errors ")
+        if user.groups.filter(name='visitor').exists():
+            user_form = GeneralUserUpdateForm(
+                request.POST, request.FILES, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+        elif user.groups.filter(name='business_unit').exists():
+            user_form = StaffUpdateForm(
+                request.POST, request.FILES, instance=user)
+            if user_form.is_valid():
+                print(request.POST)
+                user_form.save()
+        elif user.groups.filter(name='staff').exists():
+            user_form = StaffUpdateForm(
+                request.POST, request.FILES, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+        elif user.groups.filter(name='student').exists():
+            user_form = StudentUpdateForm(
+                request.POST, request.FILES, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+
+        messages.success(request, f'account update successfully')
         return redirect('users:profile')
 
 
@@ -98,22 +130,22 @@ def activate_account(request, pk):
     user = User.objects.filter(pk=pk).first()
     user.is_active = True
     user.save()
-    messages.success(request, f"{user.user_name}'s account activated successfully")
-    add_user_to_group(user)
+    messages.success(
+        request, f"{user.user_name}'s account activated successfully")
     return redirect('users:pending-accounts')
 
 
-def add_user_to_group(user):
-    member = LifeChoicesMember.objects.create(user=user)
-    group = None
-    if user.roles == 'business_unit' or 'staff':
-        if user.roles == 'business_unit':
-            group = Group.objects.get(name='business_unit')
-        elif user.roles == 'staff':
-            group = Group.objects.get(name='staff')
-        LifeChoicesStuff.objects.create(user=member)
-    elif user.roles == 'student':
-        group = Group.objects.get(name='student')
-        LifeChoicesAcademy.objects.get_or_create(user=member)
-    user.groups.add(group)
-    user.save()
+class ViewProfile(View):
+    template_name = 'profile/profile.html'
+
+    def get(self):
+        context = {}
+        form = BankingDetailsForm()
+        context['form'] = form
+        return render(self.request, self.template_name, context)
+
+    def post(self):
+        form = BankingDetailsForm(self.request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('store:viewprofile')
