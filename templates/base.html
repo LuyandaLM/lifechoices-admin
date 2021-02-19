@@ -612,7 +612,7 @@ textarea{
           <button class="dropdown-item" type="button">Clock In/Out</button>
           <button class="dropdown-item" type="button"><a class="navbar-brand" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
           {% endif %}
-          <a href="{% url 'users:profile' %}" class="dropdown-item" type="button">Account</a>
+          <a href="{% url 'users:viewprofile' %}" class="dropdown-item" type="button">Profile</a>
           <a href="{% url 'users:logout' %}" class="dropdown-item" type="button">Log Out</a>
         </div>
         {% endif %}
