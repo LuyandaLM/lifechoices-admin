@@ -40,24 +40,33 @@ class GeneralUserUpdateForm(forms.ModelForm):
             return instance
 
 
-class LifeChoicesForm(forms.ModelForm):
+class LifeChoicesForm(GeneralUserUpdateForm, forms.ModelForm):
     class Meta:
         model = LifeChoicesMember
-        # exclude = ('user',)
+        exclude = ('user',)
         fields = "__all__"
 
 
-class StudentUpdateForm(forms.ModelForm):
+class StudentUpdateForm(LifeChoicesForm, forms.ModelForm):
 
     class Meta:
         model = LifeChoicesAcademy
-        # exclude = ('user',)
+        exclude = ('user',)
         fields = "__all__"
 
 
-class StaffUpdateForm(forms.ModelForm):
+class StaffUpdateForm(LifeChoicesForm, forms.ModelForm):
 
     class Meta:
         model = LifeChoicesStuff
-        # exclude = ('user',)
+        exclude = ('user',)
+        fields = "__all__"
+
+# SEGMENTED FORMS
+
+
+class BankingDetailsForm(forms.ModelForm):
+    class Meta:
+        model = LifeChoicesStuff
+        exclude = ('user',)
         fields = "__all__"

@@ -106,7 +106,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.user_name
+        return self.email
 
     # image re-sizing using PIL
     # def save(self, *args, **kwargs):
@@ -144,7 +144,8 @@ class LifeChoicesStuff(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
     # Banking details
     bank_name = models.CharField(max_length=50, null=True, blank=False)
-    account_holder_name = models.CharField(max_length=50, null=True, blank=False)
+    account_holder_name = models.CharField(
+        max_length=50, null=True, blank=False)
     account_number = models.CharField(max_length=50, null=True, blank=False)
     branch_name = models.CharField(max_length=50, null=True, blank=False)
     branch_number = models.CharField(max_length=50, null=True, blank=False)
