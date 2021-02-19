@@ -199,8 +199,8 @@ class LeaveApplication(models.Model):
     leave_date_from = models.DateField(blank=False, null=False)
     leave_date_to = models.DateField(blank=False, null=False)
 
-    def __str__(self):
-        return f"Leave request by {self.user} from {self.leave_date_from} - {self.leave_date_to}"
+    # def __str__(self):
+    #     return f"Leave request by {self.user} from {self.leave_date_from} - {self.leave_date_to}"
 
 
 class CheckIn(models.Model):

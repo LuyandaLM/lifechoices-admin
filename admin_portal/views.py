@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesStuff, LifeChoicesAcademy
 from .forms import CovidForm
+from .writing_to_csv import write_to_covid_csv, write_to_user_csv
 
 
 class HomePageView(View):
@@ -15,6 +16,7 @@ class HomePageView(View):
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):
             messages.success(request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
+
             return redirect('admin_portal:covid-questionnaire')
         # if request.user.roles == 'visitor':
         #     return redirect('https://www.lifechoices.co.za/')
@@ -22,6 +24,8 @@ class HomePageView(View):
             'pending_accounts': User.objects.filter(is_active=False),
             'leaves_applications': LeaveApplication.objects.all()
         }
+        write_to_covid_csv()
+        write_to_user_csv()
         return render(request, self.template_name, context=context)
 
 
