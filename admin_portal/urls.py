@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage, ChatPageView,\
-    AdminPageView, CheckinPageView, AccountProfilePageView
+    CheckinPageView
 
 
 app_name = 'admin_portal'
