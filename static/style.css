@@ -435,3 +435,9 @@ background: none;
 .checkinbg {
 color: black;
 }
+/*account profile */
+.profilepic {
+	height: 200px;
+	width: auto;
+	position: center;
+}
