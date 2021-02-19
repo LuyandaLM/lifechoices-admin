@@ -105,23 +105,8 @@ class ChatPageView(View):
         return render(request, self.template_name)
 
 
-class AdminPageView(View):
-    template_name = "admin.html"
-
-    def get(self, request, *args, **kwargs):
-        # form = self.form_class(initial=self.initial)
-        return render(request, self.template_name)
-
-
 class CheckinPageView(View):
     template_name = "checkin.html"
-
-    def get(self, request, *args, **kwargs):
-        # form = self.form_class(initial=self.initial)
-        return render(request, self.template_name)
-
-class AccountProfilePageView(View):
-    template_name = "accountprofile.html"
 
     def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)

@@ -83,7 +83,7 @@ def profile(request):
             context = {
                 'form': user_form,
             }
-        return render(request, 'profile.html', context=context)
+        return render(request, 'account_profile.html', context=context)
 
     if request.method == 'POST':
         if user.groups.filter(name='visitor').exists():
@@ -161,3 +161,11 @@ class ViewProfile(View):
         if form.is_valid():
             form.save()
         return redirect('store:viewprofile')
+
+
+class AdminPageView(View):
+    template_name = "admin.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)

@@ -14,7 +14,5 @@ urlpatterns = [
     path('pending-leave-applications/', PendingLeaveApplicationPage.as_view(), name='pending-leaves'),
     path('api/', include('admin_portal.api.urls')),
     path('chat/', ChatPageView.as_view(), name='chat'),
-    path('adminpage/', AdminPageView.as_view(), name='admin'),
     path('checkin/', CheckinPageView.as_view(), name='checkin'),
-    path('accountprofile/', AccountProfilePageView.as_view(), name='accountprofile'),
 ]
