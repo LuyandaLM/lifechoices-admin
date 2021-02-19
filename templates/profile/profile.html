@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="profile-header">
+        <div class="container">
+          <div class="row">
+              <div class="col-sm-12 col-md-4">
+                <img class="rounded-circle img-fluid" src="{{ user.image.url }}">
+              </div>
+              <div class="col-sm-12 col-md-8">
+                <div class="info-holder mt-4">
+                    <h3 style='color:black;'> {{user.first_name}} {{user.last_name}}</h3>
+                    <h6 style='color:black;'> {{user.email}} </h6>
+                    <h6 style='color:black;'> {{user.cell_number}} </h6>
+                    <span class="badge badge-success">{{user.roles}}</span>
+                </div>   
+            </div>
+          </div>  
+          <!--row-->
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="#!">Action</a>
+                  <a class="dropdown-item" href="#!">Another action</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="#!">Action</a>
+                  <a class="dropdown-item" href="#!">Another action</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--row-->
+          <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="#!">Action</a>
+                  <a class="dropdown-item" href="#!">Another action</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="#!">Action</a>
+                  <a class="dropdown-item" href="#!">Another action</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <a class="dropdown-item" href="#!">Action</a>
+                  <a class="dropdown-item" href="#!">Another action</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+{% endblock content %}
