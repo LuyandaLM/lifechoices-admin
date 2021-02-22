@@ -138,7 +138,7 @@ def activate_account(request, pk):
 
 
 class ViewProfile(View):
-    template_name = 'profile/profile.html'
+    template_name = 'accountprofile.html'
 
     def get(self, request):
         context = {}
