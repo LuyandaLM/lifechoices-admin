@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import View, ListView, DetailView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -41,6 +41,8 @@ class Register(View):
             if role == "visitor":
                 group = Group.objects.get(name='visitor')
                 user.groups.add(group)
+                messages.success(request, f'{username} your account has been created! You are now able to log in')
+                return redirect('users:login')
             elif role == 'business_unit':
                 group = Group.objects.get(name='business_unit')
                 user.groups.add(group)
@@ -50,10 +52,7 @@ class Register(View):
             else:
                 group = Group.objects.get(name='student')
                 user.groups.add(group)
-
-            messages.success(
-                request, f'{username} your account has been created! You are now able to log in')
-            return redirect('users:login')
+            return redirect('users:registration-confirmation')
         else:
             return render(request, self.template_name, {'form': form})
 
@@ -67,8 +66,8 @@ def profile(request):
     if request.method == "GET":
         if additional_forms(request)[1]:
             context = {
-                # 'form': user_form,
-                # 'life_choices_form': additional_forms(request)[0],
+                'form': user_form,
+                'life_choices_form': additional_forms(request)[0],
                 'formset': additional_forms(request)[1],
             }
         else:
@@ -162,3 +161,7 @@ class AdminPageView(View):
     def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)
         return render(request, self.template_name)
+
+
+class RegistrationConfirmation(TemplateView):
+    template_name = "admin.html"

@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import Register, profile, PendingAccounts, ActivatePendingAccount, activate_account, ViewProfile, AdminPageView
+from .views import Register, profile, PendingAccounts, ActivatePendingAccount, activate_account, ViewProfile, \
+    AdminPageView, RegistrationConfirmation
 
 app_name = 'users'
 
@@ -16,5 +17,5 @@ urlpatterns = [
     path('view-profile/', ViewProfile.as_view(), name='view-profile'),
     path('admin-page/', AdminPageView.as_view(), name='admin'),
     # path('account-profile/', AccountProfilePageView.as_view(), name='accountprofile'),
-
+    path('registration-confirmation/', RegistrationConfirmation.as_view(), name='registration-confirmation'),
 ]
