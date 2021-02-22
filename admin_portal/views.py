@@ -7,7 +7,7 @@ from django.contrib import messages
 
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesStuff, LifeChoicesAcademy
 from .forms import CovidForm
-from .writing_to_csv import write_to_covid_csv, write_to_user_csv
+from .writing_to_csv import write_to_covid_csv, write_to_user_csv, write_to_leave_csv
 
 
 class HomePageView(View):
@@ -26,6 +26,7 @@ class HomePageView(View):
         }
         write_to_covid_csv()
         write_to_user_csv()
+        write_to_leave_csv()
         return render(request, self.template_name, context=context)
 
 
