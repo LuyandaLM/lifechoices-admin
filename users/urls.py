@@ -13,7 +13,7 @@ urlpatterns = [
     path('pending-accounts/<int:pk>', ActivatePendingAccount.as_view(),
          name='activate-pending-accounts'),
     path('activate-account/<int:pk>', activate_account, name='activate-account'),
-    path('view-profile/', ViewProfile.as_view(), name='viewprofile'),
+    path('view-profile/', ViewProfile.as_view(), name='view-profile'),
     path('admin-page/', AdminPageView.as_view(), name='admin'),
     # path('account-profile/', AccountProfilePageView.as_view(), name='accountprofile'),
 

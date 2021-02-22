@@ -31,7 +31,7 @@ class RegisterUserForm(UserCreationForm):
 class GeneralUserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        exclude = ('is_staff', 'is_active', 'last_login', 'group', 'roles', 'groups', 'is_superuser', 'password',
+        exclude = ('is_staff', 'is_admin', 'is_active', 'last_login', 'group', 'roles', 'groups', 'is_superuser', 'password',
                    'user_permissions', 'date_joined')
         fields = "__all__"
 

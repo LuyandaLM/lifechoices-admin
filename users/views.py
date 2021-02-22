@@ -63,51 +63,44 @@ def profile(request):
     user = request.user
     # load form specific to user
     user_form = GeneralUserUpdateForm(instance=user)
-    if user.groups.filter(name='visitor').exists():
-        user_form = GeneralUserUpdateForm(instance=user)
-    elif user.groups.filter(name='business_unit').exists():
-        user_form = StaffUpdateForm(instance=user)
-    elif user.groups.filter(name='staff').exists():
-        user_form = StaffUpdateForm(instance=user)
-    elif user.groups.filter(name='student').exists():
-        user_form = StudentUpdateForm(instance=user)
 
     if request.method == "GET":
         if additional_forms(request)[1]:
             context = {
-                'form': user_form,
-                'life_choices_form': additional_forms(request)[0],
+                # 'form': user_form,
+                # 'life_choices_form': additional_forms(request)[0],
                 'formset': additional_forms(request)[1],
             }
         else:
             context = {
                 'form': user_form,
             }
-        return render(request, 'account_profile.html', context=context)
+        return render(request, 'profile.html', context=context)
 
     if request.method == 'POST':
-        if user.groups.filter(name='visitor').exists():
-            user_form = GeneralUserUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-        elif user.groups.filter(name='business_unit').exists():
-            user_form = StaffUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                print(request.POST)
-                user_form.save()
-        elif user.groups.filter(name='staff').exists():
-            user_form = StaffUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-        elif user.groups.filter(name='student').exists():
-            user_form = StudentUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-
+        user_form = GeneralUserUpdateForm(request.POST, request.FILES, instance=user)
+        # saving the general form
+        if user_form.is_valid():
+            user_form.save()
+            # only users that are life choices can submit this forms
+            if additional_forms(request)[0]:
+                print('im here')
+                # basic details required from a life choices member
+                member = LifeChoicesMember.objects.filter(user=request.user).first()
+                life_choices_form = LifeChoicesForm(request.POST, instance=member)
+                if life_choices_form.is_valid():
+                    life_choices_form.save()
+                if request.user.roles == 'business_unit' or 'staff':
+                    print('im a b or sta')
+                    instance = LifeChoicesStuff.objects.filter(user=member).first()
+                    formset = StaffUpdateForm(request.POST, instance=instance)
+                    if formset.is_valid():
+                        formset.save()
+                elif request.user.roles == 'student':
+                    print('im a stu')
+                    formset = StudentUpdateForm(request.POST, instance=request.user)
+                    if formset.is_valid():
+                        formset.save()
         messages.success(request, f'account update successfully')
         return redirect('users:profile')
 
@@ -148,7 +141,7 @@ def activate_account(request, pk):
 
 
 class ViewProfile(View):
-    template_name = 'profile/profile.html'
+    template_name = 'account_profile.html'
 
     def get(self, request):
         context = {}
