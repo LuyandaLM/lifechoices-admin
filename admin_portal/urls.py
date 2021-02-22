@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage, ChatPageView,\
-    AdminPageView, CheckinPageView, AccountProfilePageView, PrintUsersPageView, PrintCovidPageView
+    AdminPageView, CheckinPageView, AccountProfilePageView, PrintUsersPageView, PrintCovidPageView, CheckinOffsitePageView
 
 
 app_name = 'admin_portal'
@@ -16,7 +16,8 @@ urlpatterns = [
     path('chat/', ChatPageView.as_view(), name='chat'),
     path('adminpage/', AdminPageView.as_view(), name='admin'),
     path('checkin/', CheckinPageView.as_view(), name='checkin'),
+    path('checkinoffsite/', CheckinOffsitePageView.as_view(), name='checkinffsite'),
     path('accountprofile/', AccountProfilePageView.as_view(), name='accountprofile'),
     path('printusers/', PrintUsersPageView.as_view(), name='printusers'),
-path('printcovid/', PrintCovidPageView.as_view(), name='printcovid'),
+    path('printcovid/', PrintCovidPageView.as_view(), name='printcovid'),
 ]

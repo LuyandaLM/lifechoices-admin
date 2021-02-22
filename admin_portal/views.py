@@ -116,6 +116,15 @@ class CheckinPageView(View):
         # form = self.form_class(initial=self.initial)
         return render(request, self.template_name)
 
+
+class CheckinOffsitePageView(View):
+    template_name = "checkinoffsite.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
+
+
 class AccountProfilePageView(View):
     template_name = "accountprofile.html"
 
