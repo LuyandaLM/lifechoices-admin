@@ -138,13 +138,13 @@ def activate_account(request, pk):
 class ViewProfile(View):
     template_name = 'profile/profile.html'
 
-    def get(self):
+    def get(self, *args, **kwargs):
         context = {}
         form = BankingDetailsForm()
         context['form'] = form
         return render(self.request, self.template_name, context)
 
-    def post(self):
+    def post(self, *args, **kwargs):
         form = BankingDetailsForm(self.request.POST)
         if form.is_valid():
             form.save()
