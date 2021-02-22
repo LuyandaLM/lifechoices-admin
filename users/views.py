@@ -164,4 +164,4 @@ class AdminPageView(View):
 
 
 class RegistrationConfirmation(TemplateView):
-    template_name = "admin.html"
+    template_name = "registration_confirmation.html"

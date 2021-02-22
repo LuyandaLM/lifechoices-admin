@@ -7,13 +7,13 @@
 					<img class="regcimg" src="{% static 'Img/regcomp.png' %}" alt="Register Complete"  style="height: 100px;"/>
 				</div>
 				<div class="col-md-12 pt-4">
-					<span
-						>Thank you for registering with<br/> our admin app. Your registration <br/>is
+					<span style="font-size: 30px;">
+						Thank you for registering with<br/> our admin app. Your registration <br/>is
 						currently awaiting approval<br/> and an email will be sent to you<br/> when
 						your account is activated.
 					</span>
                     <div class="col-md-12 pt-4">
-                        <button class="btn btn-primary approvebtn">Back to Sign in</button>
+                        <a href="{% url 'users:login' %}" class="btn btn-primary approvebtn">Back to Sign in</a>
 				</div>
 			</div>
 			</div>
