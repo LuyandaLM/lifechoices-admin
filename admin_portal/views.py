@@ -122,3 +122,19 @@ class AccountProfilePageView(View):
     def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)
         return render(request, self.template_name)
+
+
+class PrintUsersPageView(View):
+    template_name = "printusers.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
+
+
+class PrintCovidPageView(View):
+    template_name = "printcovid.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)

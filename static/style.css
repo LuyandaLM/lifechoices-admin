@@ -414,6 +414,12 @@ color: white;
 color: black;
 background: none;
 }
+
+.adminbtn {
+   background-color: #abcc37 !important;
+   background: #abcc37 !important;
+   border: none;
+}
 /* checkin */
 .covidbtn,
 .checkinbtn {
@@ -427,7 +433,6 @@ background: none;
 }
 .covidbtn {
 	background-color: rgb(171, 204, 55, 0.5);
-
 }
 .checktick {
 	color: #abcc37;
@@ -444,3 +449,14 @@ color: black;
 /*.accpro {
 color : black;
 }*/
+/* print covid*/
+table, th, td {
+  border: 2px solid white !important;
+  padding:5px;
+}
+
+.printbtn{
+background: #abcc37 !important;
+border:none;
+}
+

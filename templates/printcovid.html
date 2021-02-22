@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<div class="container">
+            <h1>Covid Questions </h1>
+<div class="row">
+    <div class="col d-none d-lg-block d-xl-none">
+        <label class="pr-3"><strong>Date</strong></label>
+        <input type="date" placeholder="22/02/22"/>
+    </div>
+    <div class="col">
+        <button class="btn btn-primary float-right printbtn">Print</button>
+    </div>
+</div>
+           <table style="width:100% ;border: solid 2px white;  ">
+  <tr style=" padding: 15px;">
+    <th>Email</th>
+    <th>Temperature</th>
+    <th>Shortness of breath</th>
+      <th>Sore throat</th>
+      <th>Loss of taste and smell</th>
+      <th>Contact with covid</th>
+      <th>Nasal congestion</th>
+      <th>Diarrhea</th>
+      <th>Nausea</th>
+  </tr>
+  <tr >
+    <td>JohnSmith@ex.com</td>
+      <td>35.4</td>
+    <td>No</td>
+    <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td> yes</td>
+  </tr>
+  <tr >
+    <td >EveJackson@ex.com</td>
+      <td>35.4</td>
+    <td>No</td>
+    <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+  </tr>
+  <tr  >
+    <td>JustinTimberbrick@ex.com</td>
+      <td>45.4</td>
+    <td>No</td>
+    <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+  </tr>
+</table>
+		</div>
+{% endblock content %}
