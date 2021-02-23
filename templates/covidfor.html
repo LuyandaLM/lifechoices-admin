@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+			<input
+				type="hidden"
+				name="csrfmiddlewaretoken"
+				value="IO7Lo72j2x2dR4Qr0Nrso1x5TuG3w0386cjIDD7PIQUNCHgr1ECGukDImkF3E6zk"
+			/>
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Covid-19 Questionnaire</legend>
+				<div class="form-group">
+					<div id="div_id_temperature" class="form-group">
+						<label for="id_temperature" class="requiredField">
+							Temperature<span class="asteriskField">*</span>
+						</label>
+						<div class="">
+							<input
+								type="number"
+								name="temperature"
+								step="0.01"
+								class="numberinput form-control"
+								required=""
+								id="id_temperature"
+							/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_Shortness_of_breath" class="form-check">
+							<label for="id_Shortness_of_breath" class="form-check-label">
+								Shortness of breath
+							</label>
+
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="Shortness_of_breath"
+										class=""
+										id="id_Shortness_of_breath"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="Shortness_of_breath"
+										class=""
+										id="id_Shortness_of_breath"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_sore_throat" class="form-check">
+							<label for="id_sore_throat" class="form-check-label">
+								Sore throat
+							</label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="sore_throat"
+										class=""
+										id="id_sore_throat"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="sore_throat"
+										class=""
+										id="id_sore_throat"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_loss_of_taste_or_smell" class="form-check">
+							<label for="id_loss_of_taste_or_smell" class="form-check-label">
+								Loss of taste or smell
+							</label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="loss_of_taste_or_smell"
+										class=""
+										id="id_loss_of_taste_or_smell"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="loss_of_taste_or_smell"
+										class=""
+										id="id_loss_of_taste_or_smell"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_contact_with_Covid" class="form-check">
+							<label for="id_contact_with_Covid" class="form-check-label">
+								Contact with Covid
+							</label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="contact_with_Covid"
+										class=""
+										id="id_contact_with_Covid"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="contact_with_Covid"
+										class=""
+										id="id_contact_with_Covid"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_nasal_congestion" class="form-check">
+							<label for="id_nasal_congestion" class="form-check-label">
+								Nasal congestion
+							</label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="nasal_congestion"
+										class=""
+										id="id_nasal_congestion"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="nasal_congestion"
+										class=""
+										id="id_nasal_congestion"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_diarrhea" class="form-check">
+							<label for="id_diarrhea" class="form-check-label">
+								Diarrhea
+							</label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="radio"
+										name="diarrhea"
+										class=""
+										id="id_diarrhea"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="radio"
+										name="diarrhea"
+										class=""
+										id="id_diarrhea"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div id="div_id_nausea" class="form-check">
+							<label for="id_nausea" class="form-check-label"> Nausea </label>
+							<div class="row">
+								<div class="pr-3">
+                                    <label>Yes : </label>
+									<input
+										type="Radio"
+										name="nausea"
+										class=""
+										id="id_nausea"
+										checked=""
+										value="yes"
+									/>
+								</div>
+								<div class="pr-3">
+                                    <label>No : </label>
+									<input
+										type="Radio"
+										name="nausea"
+										class=""
+										id="id_nausea"
+										value="no"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<button class="btn btn-primary covidqbtn" type="submit">Submit</button>
+		</div>
+{% endblock content %}
