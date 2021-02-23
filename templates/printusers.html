@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container " style="color: black">
+    <h1>Users</h1>
+			<div id="accordion">
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary printbtn">Print Users</button>
+    </div>
+</div>
+  <div class="card">
+    <div class="card-header">
+      <a class="collapsed card-link" data-toggle="collapse" href="#collapseOne">
+        Jack Daniels
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+       <form class="d-none d-lg-block d-xl-none">
+            <div class="row">
+                <div class="col-3">
+                    <label>Email:</label>
+                    <input disabled placeholder="JackDs@gmail.com"/>
+                </div>
+                <div class="col-3">
+                    <label>Cell:</label>
+                    <input disabled placeholder="093434524"/>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                    <label>Address:</label>
+                    <input disabled placeholder="17 clever lane"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+        Ross Boomsocks
+      </a>
+    </div>
+    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+      <div class="card-body">
+        <form class="d-none d-lg-block d-xl-none">
+            <div class="row">
+                <div class="col-3">
+                    <label>Email:</label>
+                    <input disabled placeholder="Boomsocks@gmail.com"/>
+                </div>
+                <div class="col-3">
+                    <label>Cell:</label>
+                    <input disabled placeholder="093434524"/>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                    <label>Address:</label>
+                    <input disabled placeholder="17 clever lane"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+        James Dean
+      </a>
+    </div>
+    <div id="collapseThree" class="collapse" data-parent="#accordion">
+      <div class="card-body">
+       <form class="d-none d-lg-block d-xl-none">
+            <div class="row">
+                <div class="col-3">
+                    <label>Email:</label>
+                    <input disabled placeholder="DeanJames@gmail.com"/>
+                </div>
+                <div class="col-3">
+                    <label>Cell:</label>
+                    <input disabled placeholder="093434524"/>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                    <label>Address:</label>
+                    <input disabled placeholder="17 clever lane"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+		</div>
+{% endblock content %}

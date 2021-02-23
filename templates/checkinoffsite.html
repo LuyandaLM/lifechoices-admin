@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+			<h1>Check into work outside</h1>
+            <div class="row">
+                <div>
+                <h4>I am</h4>
+                </div>
+                <div class="col-12">
+                     <input type="radio" value="field" name="offsite"/>
+                     <span>Working in the field</span>
+
+                </div>
+                <div class="col-12 pl-4 pb-3">
+                    <input type="text" placeholder="Location"/>
+                </div>
+                <div class="col-12">
+                    <input type="radio" value="home" name="offsite"/>
+                    <span>Working from home</span>
+               </div>
+
+            </div>
+            <div class="row pb-3">
+                <h4>
+                    Notify others
+                </h4>
+                <div class="col-12">
+                    <input type="checkbox"/>
+                    <span>notify manager & staff that I will be working out of office</span>
+               </div>
+            </div>
+            <button class="btn btn-primary offsitebtn p-4">Sign in</button>
+		</div>
+{% endblock content %}

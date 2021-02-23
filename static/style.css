@@ -191,6 +191,7 @@ h1{
     height: 40px;
     margin-top: 8px;
 }
+
 h1{
     margin: 18px 0 ! important;
     font-family: 'Caveat', cursive;
@@ -414,6 +415,12 @@ color: white;
 color: black;
 background: none;
 }
+
+.adminbtn {
+   background-color: #abcc37 !important;
+   background: #abcc37 !important;
+   border: none;
+}
 /* checkin */
 .covidbtn,
 .checkinbtn {
@@ -427,7 +434,6 @@ background: none;
 }
 .covidbtn {
 	background-color: rgb(171, 204, 55, 0.5);
-
 }
 .checktick {
 	color: #abcc37;
@@ -444,3 +450,30 @@ color: black;
 /*.accpro {
 color : black;
 }*/
+/* print covid*/
+table, th, td {
+  border: 2px solid white !important;
+  padding:5px;
+}
+
+.printbtn{
+background: #abcc37 !important;
+border:none;
+}
+/*checkinoffsite */
+h4 {
+ margin: 18px 0 ! important;
+    font-family: 'Caveat', cursive;
+    color: #abcc37;
+    text-shadow: 1px 1px 2px #343a40;
+}
+
+.offsitebtn {
+background-color: #abcc37 !important;
+border: none;
+}
+
+.btn-primary {
+background-color: #abcc37 !important;
+border: none;
+}
