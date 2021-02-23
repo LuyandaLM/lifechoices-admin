@@ -17,23 +17,23 @@
 					<div class="col-6">
 						<form>
 							<div class="row form-group">
-								<label class="col-6"> First name</label>
+								<label class="col-6"> First name: </label>
 								<span class="col-6"> {{user.first_name}}</span>
 							</div>
 							<div class="row form-group">
-								<label class="col-6"> Last name</label>
+								<label class="col-6"> Last name: </label>
 								<span class="col-6"> {{user.last_name}}</span>
 							</div>
 							<div class="row form-group">
-								<label class="col-6"> Gender</label>
+								<label class="col-6"> Gender: </label>
 								<span class="col-6"> {{user.gender}}</span>
 							</div>
-							<div class="row form-group d-none">
-								<label class="col-6"> ID number</label>
-								<span class="col-6"> {{user.ID_number}}</span>
+							<div class="row form-group">
+								<label class="col-6"> ID number: </label>
+								<span class="col-6"> {{member.ID_number}}</span>
 							</div>
 							<div class="row form-group">
-								<label class="col-6"> Date of birth</label>
+								<label class="col-6"> Date of birth: </label>
 								<span class="col-6"> {{user.date_of_birth}}</span>
 							</div>
 							<div class="row form-group">
@@ -44,7 +44,7 @@
 				</div>
 				<div id="accordion" class="accordion">
 					<div class="row border-bottom">
-						<div class="col-2">
+						<div class="col">
 							<a
 								class="btn dropdown"
 								data-toggle="collapse"
@@ -58,7 +58,7 @@
 								Personal details
 							</a>
 						</div>
-						<div class="col-2">
+						<div class="col">
 							<a
 								class="btn dropdown"
 								data-toggle="collapse"
@@ -72,21 +72,7 @@
 								Contact details
 							</a>
 						</div>
-						<div class="col-2">
-							<a
-								class="btn dropdown"
-								data-toggle="collapse"
-								data-target="#collapse3"
-                                data-parent="#accordion"
-								role="button"
-								aria-expanded="false"
-								aria-controls="collapse3"
-								style="border: none"
-							>
-								Banking details
-							</a>
-						</div>
-						<div class="col-2">
+						<div class="col">
 						<a
 							class="btn btndrop"
 							data-toggle="collapse"
@@ -100,7 +86,23 @@
 							Family details
 						</a>
 					</div>
-					<div class="col-2">
+						{% if member %}
+							<div class="col">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse3"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse3"
+								style="border: none"
+							>
+								Banking details
+							</a>
+						</div>
+
+					<div class="col">
 						<a
 							class="btn btndrop"
 							data-toggle="collapse"
@@ -114,6 +116,8 @@
 							Medical details
 						</a>
 					</div>
+						{% endif %}
+
 					</div>
 					<div class="accordion-group">
 						<div class="row pt-3">
@@ -182,23 +186,27 @@
 								<form>
 									<div class="row form-group">
 										<label class="col-6"> Bank name</label>
-										<span class="col-6">{{user.permanent_address}}</span>
+										<span class="col-6">{{ bank_details.bank_name }}</span>
 									</div>
 									<div class="row form-group">
 										<label class="col-6"> Account holder name</label>
-										<span class="col-6">{{user.permanent_address}}</span>
+										<span class="col-6">{{ bank_details.account_holder_name }}</span>
 									</div>
 									<div class="row form-group">
 										<label class="col-6"> Account number</label>
-										<span class="col-6">{{user.permanent_address}}</span>
+										<span class="col-6">{{ bank_details.account_number }}</span>
 									</div>
 									<div class="row form-group">
 										<label class="col-6"> Branch name</label>
-										<span class="col-6">{{user.permanent_address}}</span>
+										<span class="col-6">{{ bank_details.branch_name }}</span>
 									</div>
 									<div class="row form-group">
 										<label class="col-6"> Branch number</label>
-										<span class="col-6">{{user.permanent_address}}</span>
+										<span class="col-6">{{ bank_details.branch_number }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Tax number</label>
+										<span class="col-6">{{ bank_details.tax_number }}</span>
 									</div>
 								</form>
 							</div>
@@ -206,15 +214,15 @@
 						<form>
 							<div class="row form-group">
 								<label class="col-6"> Next of kin name</label>
-								<span class="col-6">{{user.permanent_address}}</span>
+								<span class="col-6">{{user.next_of_kin_name}}</span>
 							</div>
 							<div class="row form-group">
 								<label class="col-6"> Next of kin relationship</label>
-								<span class="col-6">{{user.permanent_address}}</span>
+								<span class="col-6">{{user.next_of_kin_relationship}}</span>
 							</div>
 							<div class="row form-group">
 								<label class="col-6"> Next of kin contact number</label>
-								<span class="col-6">{{user.permanent_address}}</span>
+								<span class="col-6">{{user.next_of_kin_contact_number}}</span>
 							</div>
 						</form>
 					</div>
@@ -222,11 +230,11 @@
 						<form>
 							<div class="row form-group">
 								<label class="col-6"> Chronic condition</label>
-								<span class="col-6">{{user.permanent_address}}</span>
+								<span class="col-6">{{ member.chronic_condition }}</span>
 							</div>
 							<div class="row form-group">
 								<label class="col-6"> Allergies</label>
-								<span class="col-6">{{user.permanent_address}}</span>
+								<span class="col-6">{{ member.allergies }}</span>
 							</div>
 						</form>
 					</div>

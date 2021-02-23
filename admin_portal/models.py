@@ -129,7 +129,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class LifeChoicesMember(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ID_number = models.IntegerField(null=True, blank=False)
+    ID_number = models.BigIntegerField(null=True, blank=False)
     chronic_condition = models.CharField(max_length=50, null=True, blank=False)
     allergies = models.CharField(max_length=50, null=True, blank=False)
 

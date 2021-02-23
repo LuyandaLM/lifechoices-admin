@@ -11,7 +11,6 @@ from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKi
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 
 
-
 class Register(View):
     """
     registration form for new users
@@ -82,6 +81,10 @@ class ActivatePendingAccount(DetailView):
 
 def activate_account(request, pk):
     user = User.objects.filter(pk=pk).first()
+    member = LifeChoicesMember.objects.get_or_create(user=user)
+    if user.roles == "student":
+        LifeChoicesAcademy.objects.get_or_create(user=member[0])
+    BankingDetail.objects.get_or_create(member[0])
     user.is_active = True
     user.save()
     messages.success(
@@ -94,16 +97,17 @@ class ViewProfile(View):
     template_name = 'account_profile.html'
 
     def get(self, *args, **kwargs):
-        context = {}
-        form = BankingDetailsForm()
-        context['form'] = form
-        return render(self.request, self.template_name, context)
-
-    def post(self, *args, **kwargs):
-        form = BankingDetailsForm(self.request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('store:viewprofile')
+        member = LifeChoicesMember.objects.filter(user=self.request.user.id).first()
+        if member:
+            student = LifeChoicesAcademy.objects.filter(user=member.id).first()
+            bank_details = BankingDetail.objects.filter(user=member.id).first()
+            context = {
+                "member": member,
+                "bank_details": bank_details,
+                "student": student
+            }
+            return render(self.request, self.template_name, context)
+        return render(self.request, self.template_name)
 
 
 class AdminPageView(View):
@@ -163,7 +167,7 @@ def update_kin_details(request):
     context = {}
     user = request.user.id
     details = User.objects.filter(id=user).first()
-    form = NextOfKinForm()
+    form = NextOfKinForm(instance=details)
     context['form'] = form
     if request.method == 'POST':
         form = NextOfKinForm(instance=details, data=request.POST)

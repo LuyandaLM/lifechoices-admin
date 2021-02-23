@@ -87,7 +87,5 @@ class ContactDetailsForm(forms.ModelForm):
 class NextOfKinForm(forms.ModelForm):
     class Meta:
         model = User
-        exclude = ('roles', 'is_staff', 'is_active', 'group', 'date_joined', 'last_login',
-                   'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'password', 'groups')
-        fields = ['next_of_kin_name', 'next_of_kin_relationship',
-                  'next_of_kin_contact_number']
+        exclude = ('roles', 'is_staff', 'is_active', 'group', 'date_joined', 'last_login', 'password', 'groups')
+        fields = ['next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number']
