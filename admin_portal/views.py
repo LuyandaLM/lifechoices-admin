@@ -5,9 +5,8 @@ from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember
 from .forms import CovidForm
-from .writing_to_csv import write_to_covid_csv, write_to_user_csv
 
 
 class HomePageView(View):
@@ -17,8 +16,8 @@ class HomePageView(View):
         if not covid_questionnaire_completed(request.user.id):
             messages.success(request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
             return redirect('admin_portal:covid-questionnaire')
-        # if request.user.roles == 'visitor':
-        #     return redirect('https://www.lifechoices.co.za/')
+        if request.user.roles == 'visitor':
+            return redirect('https://www.lifechoices.co.za/')
         context = {
             'pending_accounts': User.objects.filter(is_active=False),
             'leaves_applications': LeaveApplication.objects.all()
@@ -77,13 +76,12 @@ class LeaveApplicationPage(View):
 
     def post(self, request, *args, **kwargs):
         member = LifeChoicesMember.objects.filter(user=request.user).first()
-        user = BankingDetail.objects.filter(user=member).first()
         leave_type = request.POST.getlist("leave")[0]
         start_date = request.POST.getlist("start_date")[0]
         end_date = request.POST.getlist("end_date")[0]
         message = request.POST.getlist("message")[0]
         file = request.POST.getlist("file")
-        leave = LeaveApplication(user=user, category=leave_type, personal_message=message, leave_date_from=start_date,
+        leave = LeaveApplication(user=member, category=leave_type, personal_message=message, leave_date_from=start_date,
                                  leave_date_to=end_date)
         leave.save()
         return render(request, self.template_name)
