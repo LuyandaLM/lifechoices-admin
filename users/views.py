@@ -84,7 +84,7 @@ def activate_account(request, pk):
     member = LifeChoicesMember.objects.get_or_create(user=user)
     if user.roles == "student":
         LifeChoicesAcademy.objects.get_or_create(user=member[0])
-    BankingDetail.objects.get_or_create(member[0])
+    BankingDetail.objects.get_or_create(user=member[0])
     user.is_active = True
     user.save()
     messages.success(
