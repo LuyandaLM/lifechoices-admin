@@ -30,7 +30,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG_VALUE')
-print(DEBUG)
 ALLOWED_HOSTS = ["https://lifechoices-admin.herokuapp.com/", "http://127.0.0.1:8000/"]
 
 
@@ -203,6 +202,6 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 DEFAULT_FILES_STORAGE = "storages.backends.s3boto3.S3boto3Storage"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 django_heroku.settings(locals())

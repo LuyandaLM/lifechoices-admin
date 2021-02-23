@@ -61,8 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     # signup fields
-    image = models.ImageField(
-        null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
+    image = models.ImageField(null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     # Employee identification
