@@ -5,7 +5,7 @@ from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesStuff, LifeChoicesAcademy
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy
 from .forms import CovidForm
 from .writing_to_csv import write_to_covid_csv, write_to_user_csv
 
@@ -16,7 +16,6 @@ class HomePageView(View):
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):
             messages.success(request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
-
             return redirect('admin_portal:covid-questionnaire')
         # if request.user.roles == 'visitor':
         #     return redirect('https://www.lifechoices.co.za/')
@@ -43,13 +42,15 @@ class CovidQuestionnairePage(View):
             covid_questionnaire = CovidQuestionnaire(user=user, temperature=form.cleaned_data['temperature'],
                                                      Shortness_of_breath=form.cleaned_data['Shortness_of_breath'],
                                                      sore_throat=form.cleaned_data['sore_throat'],
-                                                     loss_of_taste_or_smell=form.cleaned_data['loss_of_taste_or_smell'],
+                                                     loss_of_taste_or_smell=form.cleaned_data[
+                                                         'loss_of_taste_or_smell'],
                                                      contact_with_Covid=form.cleaned_data['contact_with_Covid'],
                                                      nasal_congestion=form.cleaned_data['nasal_congestion'],
                                                      diarrhea=form.cleaned_data['diarrhea'],
                                                      nausea=form.cleaned_data['nausea'])
             covid_questionnaire.save()
-            messages.success(request, f'{user.user_name} form completed successfully')
+            messages.success(
+                request, f'{user.user_name} form completed successfully')
             return redirect('admin_portal:home')
         else:
             form = CovidForm()
@@ -76,7 +77,7 @@ class LeaveApplicationPage(View):
 
     def post(self, request, *args, **kwargs):
         member = LifeChoicesMember.objects.filter(user=request.user).first()
-        user = LifeChoicesStuff.objects.filter(user=member).first()
+        user = BankingDetail.objects.filter(user=member).first()
         leave_type = request.POST.getlist("leave")[0]
         start_date = request.POST.getlist("start_date")[0]
         end_date = request.POST.getlist("end_date")[0]

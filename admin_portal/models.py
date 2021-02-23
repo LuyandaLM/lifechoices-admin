@@ -107,6 +107,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
     # image re-sizing using PIL
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
@@ -126,7 +134,7 @@ class LifeChoicesMember(models.Model):
     allergies = models.CharField(max_length=50, null=True, blank=False)
 
     def __str__(self):
-        return self.user.user_name
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 # life-choice members
@@ -139,7 +147,7 @@ class LifeChoicesAcademy(models.Model):
 
 
 # life choices stuff
-class LifeChoicesStuff(models.Model):
+class BankingDetail(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
     # Banking details
     bank_name = models.CharField(max_length=50, null=True, blank=False)
@@ -149,11 +157,10 @@ class LifeChoicesStuff(models.Model):
     branch_name = models.CharField(max_length=50, null=True, blank=False)
     branch_number = models.CharField(max_length=50, null=True, blank=False)
     # chronic illness and allergies
-    WorkPermit_number = models.CharField(max_length=25, null=True, blank=False)
     tax_number = models.CharField(max_length=25, null=True, blank=False)
 
     def __str__(self):
-        return self.user.user.user_name
+        return f'{self.user.user.first_name} {self.user.user.last_name}'
 
 
 # Covid Questionnaires
@@ -188,7 +195,7 @@ class LeaveApplication(models.Model):
         ('Compensation Leave', 'Compensation Leave'),
         ('Other Leave', 'Other Leave')
     )
-    user = models.ForeignKey(LifeChoicesStuff, on_delete=models.CASCADE)
+    user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
 
     # info
     category = models.CharField(

@@ -617,7 +617,7 @@ textarea{
         <a href="{% url 'users:login' %}" id="SignInButton">Sign In</a>
         {% else %}
         <button id="UserDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="rounded-circle" src="{{ user.image.url }}">
+          <img class="rounded-circle" src="{{ user.imageURL }}">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
           {% if user.roles != 'visitor' %}

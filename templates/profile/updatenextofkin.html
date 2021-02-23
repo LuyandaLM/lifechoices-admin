@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container accpro">
+			<div>
+				<div class="row border-bottom pb-3">
+					<div class="col-6 d-sm-none d-md-block d-none d-sm-block">
+						<div class="row">
+							<img
+								class="profilepic col-md-6 rounded-circle"
+    
+                                src="{{ user.imageURL }}"
+								alt="profilepic"
+							/>
+						</div>
+					</div>
+					<div class="col-md-6">
+            <div class="personal-details">
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="{% url 'users:viewprofile'%}">Overview</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'users:updateprofile' pk=user.id %}">Update</a>
+                  </li>
+              </ul>
+              <div class="personal-details--holder">
+                <div class="flex  py-2">
+                    <span class="text-gray-500">First Name</span>
+                    <span class="ml-auto text-gray-900">{{user.first_name}}</span>
+                  </div>
+                  <div class="flex border-t border-gray-200 py-2">
+                    <span class="text-gray-500">Last Name</span>
+                    <span class="ml-auto text-gray-900">{{user.last_name}}</span>
+                  </div>
+                  <div class="flex border-t border-gray-200 py-2">
+                    <span class="text-gray-500">Email</span>
+                    <span class="ml-auto text-gray-900">{{user.email}}</span>
+                  </div>
+                  <div class="flex border-t border-gray-200 py-2">
+                    <span class="text-gray-500">Phone Number</span>
+                    <span class="ml-auto text-gray-900">{{user.cell_number}}</span>
+                  </div>
+                  <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+                    <span class="text-gray-500">Status</span>
+                    <span class="ml-auto text-yellow-500 hover:text-blue-500">
+                      {{user.groups.all.0}}
+                    </span>
+                  </div>
+              </div>
+            </div>
+		</div>
+		</div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+				<a class="nav-link " aria-current="page" href="{% url 'users:updatebankingdetails' %}">Banking Details</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'users:updatecontact' %}">Contact Details</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="{% url 'users:updatekin' %}">Next of Kin</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " href="#" >Disabled</a>
+			</li>
+        </ul>
+		<div class="personal-details--holder">
+            <form  method="POST" >
+               {% csrf_token %}
+               {{form}}
+               <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+
+         </div>	
+
+    </div>
+
+</div>
+{% endblock content %}
