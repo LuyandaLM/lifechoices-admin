@@ -49,7 +49,7 @@ class Register(View):
                 messages.success(request, f'{username} your account has been created! You are now able to log in')
                 user_group = Group.objects.get(name='visitor')
                 user.groups.add(user_group)
-                return redirect('users:registration-confirmation')
+                return redirect('users:login')
             elif role == 'business_unit':
                 user_group = Group.objects.get(name='business_unit')
             elif role == '	staff':
@@ -61,7 +61,8 @@ class Register(View):
             user.groups.add(user_group)
             messages.success(
                 request, f'{username} your account has been created! You are now able to log in')
-            return redirect('users:login')
+            return redirect('users:registration-confirmation')
+
         else:
             return render(request, self.template_name, {'form': form})
 
