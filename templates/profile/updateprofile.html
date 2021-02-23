@@ -1,47 +1,12 @@
-{% extends 'base.html' %}
+{% include 'profile/profile_base.html' %}
 {% load static %}
-{% block content %}
-			<div class="container accpro">
-			
-				<div class="row border-bottom pb-3">
-					<div class="col-6 d-sm-none d-md-block d-none d-sm-block">
-						<div class="row">
-							<img
-								class="profilepic col-md-6 rounded-circle"
-								src="{{ user.imageURL }}"
-								alt="profilepic"
-							/>
-						</div>
-					</div>
-					<div class="col-md-6">
-            			<div class="personal-details">
-              				<ul class="nav nav-tabs">
-                				<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="{% url 'users:updatebankingdetails' %}">Banking Details</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="{% url 'users:updatecontact' %}">Contact Details</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="{% url 'users:updatekin' %}">Next of Kin</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link " href="#" >Disabled</a>
-								</li>
-              				</ul>
-              				<div class="personal-details--holder">
-                 				<form  method="POST" enctype="multipart/form-data">
-                    				{% csrf_token %}
-                    				{{form}}
-                    				<button class="btn btn-primary" type="submit">Update</button>
-                 				</form>
-
-              				</div>
-            			</div>
-					
-					</div>
-
-        		</div>
-
-			</div>
-{% endblock content %}
+{% load crispy_forms_tags %}
+<div class="container accpro mt-2 mb-5">
+    <div class="personal-details--holder">
+            <form  method="POST" enctype="multipart/form-data">
+               {% csrf_token %}
+               {{form|crispy}}
+               <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+         </div>
+</div>
