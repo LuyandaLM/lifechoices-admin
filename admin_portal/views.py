@@ -176,3 +176,20 @@ def error_403(request, exception):
 def error_400(request, exception):
     data = {}
     return render(request, 'error_handling_pages/400.html', data)
+
+
+def error_204(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/204.html', data)
+
+
+def error_401(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/401.html', data)
+
+
+def error_402(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/402.html', data)
+
+
