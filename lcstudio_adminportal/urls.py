@@ -36,6 +36,11 @@ urlpatterns = [
          name='password_reset_complete'),
 ]
 
+handler404 = 'admin_portal.views.error_404'
+handler500 = 'admin_portal.views.error_500'
+handler403 = 'admin_portal.views.error_403'
+handler400 = 'admin_portal.views.error_400'
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

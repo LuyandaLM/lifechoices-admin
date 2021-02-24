@@ -156,3 +156,23 @@ class CalendarPageView(View):
     def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)
         return render(request, self.template_name)
+
+
+def error_404(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/404.html', data)
+
+
+def error_500(request, *args, **kwargs):
+    data = {}
+    return render(request, 'error_handling_pages/500.html', data)
+
+
+def error_403(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/403.html', data)
+
+
+def error_400(request, exception):
+    data = {}
+    return render(request, 'error_handling_pages/400.html', data)
