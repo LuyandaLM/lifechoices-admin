@@ -597,6 +597,10 @@ textarea{
     margin-right: 0;
 }*/
 
+.checkinbtn{
+  display: none
+}
+
 
 </style>
 
@@ -647,6 +651,29 @@ textarea{
       {% block content %}
       {% endblock content %}
     </div>
+<script>
+    var btn = document.getElementsByClassName("checkinbtn");
+    var x = document.getElementById("latitude");
+    var y = document.getElementById("longitude");
+			function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+				x.value = "Geolocation is not supported by this browser.";
+			}
+			}
 
+			function showPosition(position) {
+            console.log(position)
+			x.value = position.coords.latitude;
+			y.value = position.coords.longitude;
+			for (i = 0; i < btn.length; i++) {
+			    btn[i].style.display = "block";
+            };
+
+			}
+			getLocation()
+
+</script>
 </body>
 </html>

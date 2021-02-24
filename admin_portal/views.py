@@ -5,8 +5,9 @@ from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, CheckIn
 from .forms import CovidForm
+from .location.location import get_current_location
 
 
 class HomePageView(View):
@@ -103,19 +104,57 @@ class ChatPageView(View):
 
 
 class CheckinPageView(View):
-    template_name = "checkin.html"
+    template_name = "check_in.html"
 
     def get(self, request, *args, **kwargs):
-        # form = self.form_class(initial=self.initial)
+        if already_checked_in:
+            messages.success(request, f'{request.user.user_name} you have already checked-in')
+            return redirect('admin_portal:home')
         return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        latitude = request.POST['latitude']
+        longitude = request.POST['longitude']
+        current_location = get_current_location(latitude, longitude)
+        location = current_location['display_name']
+        user_check_in = CheckIn(user=user, location=(current_location['display_name']))
+        user_check_in.save()
+        messages.success(request, f"{user.user_name} you have checked-in at {location}")
+        return redirect('admin_portal:home')
 
 
 class CheckinOffsitePageView(View):
     template_name = "checkinoffsite.html"
 
     def get(self, request, *args, **kwargs):
-        # form = self.form_class(initial=self.initial)
+        if already_checked_in:
+            messages.success(request, f'{request.user.user_name} you have already checked-in')
+            return redirect('admin_portal:home')
         return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        latitude = request.POST['latitude']
+        longitude = request.POST['longitude']
+        remote_work = False
+        if request.POST['remote_work'] == 'on':
+            remote_work = True
+        current_location = get_current_location(latitude, longitude)
+        location = current_location['display_name']
+        user_check_in = CheckIn(user=user, location=(current_location['display_name']), remote_work=remote_work)
+        user_check_in.save()
+        messages.success(request, f"{user.user_name} you have checked-in at {location}")
+        return redirect('admin_portal:home')
+
+
+def already_checked_in(request):
+    check_in_locations = CheckIn.objects.filter(user=request.user)
+    todays_date = datetime.now().date()
+    for check_in in check_in_locations:
+        if todays_date == check_in.time_signed_in.date():
+            return True
+    return False
 
 
 class AccountProfilePageView(View):

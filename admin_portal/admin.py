@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import User, CovidQuestionnaire, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
+from .models import User, CovidQuestionnaire, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail, \
+    CheckIn
 
 admin.site.register(User)
 admin.site.register(CovidQuestionnaire)
@@ -7,4 +8,6 @@ admin.site.register(LeaveApplication)
 admin.site.register(LifeChoicesMember)
 admin.site.register(LifeChoicesAcademy)
 admin.site.register(BankingDetail)
+admin.site.register(CheckIn)
+
 # admin.site.site_header = "Administration"

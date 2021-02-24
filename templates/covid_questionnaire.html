@@ -10,6 +10,11 @@
                 <legend class="border-bottom mb-4">Covid-19 Questionnaire</legend>
                 <div class="form-group">
                     {{ form|crispy }}
+
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-sm" name="latitude" id="latitude" />
+                    <input class="form-control form-control-sm" name="longitude" id="longitude" />
                 </div>
             </fieldset>
             <button class="btn btn-primary covidqbtn" type="submit">Submit</button>
