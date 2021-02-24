@@ -107,7 +107,7 @@ class CheckinPageView(View):
     template_name = "check_in.html"
 
     def get(self, request, *args, **kwargs):
-        if already_checked_in:
+        if already_checked_in(request.user):
             messages.success(request, f'{request.user.user_name} you have already checked-in')
             return redirect('admin_portal:home')
         return render(request, self.template_name)
@@ -128,7 +128,7 @@ class CheckinOffsitePageView(View):
     template_name = "checkinoffsite.html"
 
     def get(self, request, *args, **kwargs):
-        if already_checked_in:
+        if already_checked_in(request.user):
             messages.success(request, f'{request.user.user_name} you have already checked-in')
             return redirect('admin_portal:home')
         return render(request, self.template_name)
@@ -148,11 +148,12 @@ class CheckinOffsitePageView(View):
         return redirect('admin_portal:home')
 
 
-def already_checked_in(request):
-    check_in_locations = CheckIn.objects.filter(user=request.user)
+def already_checked_in(user):
+    check_in_locations = CheckIn.objects.filter(user=user)
     todays_date = datetime.now().date()
     for check_in in check_in_locations:
         if todays_date == check_in.time_signed_in.date():
+            print('im here')
             return True
     return False
 
