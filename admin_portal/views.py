@@ -233,3 +233,17 @@ def error_402(request, exception):
     return render(request, 'error_handling_pages/402.html', data)
 
 
+class CheckOutlcPageView(View):
+    template_name = "checkoutlc.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
+
+
+class CheckOutoffPageView(View):
+    template_name = "checkoutoff.html"
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class(initial=self.initial)
+        return render(request, self.template_name)
