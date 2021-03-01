@@ -217,5 +217,9 @@ class CheckIn(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)
     time_signed_in = models.DateTimeField(auto_now_add=True)
+    remote_work = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user} signed in at {self.location}"
 
 

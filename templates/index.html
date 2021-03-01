@@ -3,6 +3,9 @@
 {% block content %}
 <div class="row">
     <div class="container-fluid">
+        <div class="row">
+            <h4 class="col-12 "><i class="fas fa-map-marker-alt"><span class="accpend">LIFE CHOICES</span></i></h4>
+        </div>
        <h1>Hey, {{ user.user_name }}</h1>
     <div id="NotificationBox">
         {% if user.is_active  %}
@@ -18,7 +21,7 @@
         <!-- here-->
     <div id="NavigationBox" class="row gutter">
         <div class=" col-6 col-md-4 col-lg-4">
-            <a href="/checkin">
+            <a href="{% url 'admin_portal:check_in' %} ">
             <div class="icon-card card">
                 <img src="{% static 'admin_portal/Img/briefcase.png' %}"/>
                 <h2>Check Into Life Choices</h2>

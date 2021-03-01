@@ -33,22 +33,5 @@
     {% block content %}
     {% endblock content %}
 </div>
-<script>
-
-    //toggle between login and register
-    const RegisterDisplay =  () => {
-        document.getElementById("RegisterArea").style.display == "none" || document.getElementById("RegisterArea").style.display == "" ? document.getElementById("RegisterArea").style.display = "block" : document.getElementById("RegisterArea").style.display = "none";
-        document.getElementById("Nav").style.display == "none" || document.getElementById("Nav").style.display == "" ? document.getElementById("Nav").style.display = "block" : document.getElementById("Nav").style.display = "none";
-        document.getElementById("LoginArea").style.display == "block" || document.getElementById("LoginArea").style.display == "" ? document.getElementById("LoginArea").style.display = "none" : document.getElementById("LoginArea").style.display = "block";
-    };
-
-    //map inputs to input area
-    const inputFields = ["Name and Surname", "ID Number", "Work Permit Number", "Tax Number", "Gender", "Date Of Birth", "Marital Status", "Nationality", "Address", "Home Telephone", "Cell Phone", "Email", "First Next of Kin", "Relationship", "First Next of Kin Telephone", "Second Next of Kin", "Relationship", "Second Next of Kin Telephone", "Number of Dependents", "Name of Bank Account Holder", "Bank Name", "Account Number", "Branch Name", "Branch Number", "Chronic Ailments and/Medical Conditions and/Allergies (For Health & Safety reasons)", "Medications"];
-    const inputs = inputFields.map(input => {
-        return `<input type='text' placeholder='${input}'/>`;
-    }).join('');
-    document.getElementById("RegisterInputArea").innerHTML = inputs;
-
-</script>
 </body>
 </html>
