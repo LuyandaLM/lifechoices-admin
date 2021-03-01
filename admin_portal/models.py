@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
+import datetime
 
 
 # Custom Account manager
@@ -210,5 +211,9 @@ class CheckIn(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)
     time_signed_in = models.DateTimeField(auto_now_add=True)
+    time_signed_out = models.DateTimeField(blank=True)
+
+    def checkout(self):
+        self.time_signed_out = datetime.datetime.now()
 
 

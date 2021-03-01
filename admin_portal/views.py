@@ -7,10 +7,12 @@ from django.contrib import messages
 
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesStuff, LifeChoicesAcademy
 from .forms import CovidForm
+from .writing_to_csv import write_to_check_in_csv
 
 
 class HomePageView(View):
     template_name = "index.html"
+    write_to_check_in_csv()
 
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):

@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/leave.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/questionnaire.csv">
           <value>
             <Attribute>
