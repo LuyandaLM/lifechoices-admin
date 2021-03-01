@@ -160,3 +160,7 @@ a, a:hover, a:active a:focus{
 .messages li{
     list-style: none;
 }
+.btn-primary {
+background-color: #abcc37 !important;
+border: none;
+}

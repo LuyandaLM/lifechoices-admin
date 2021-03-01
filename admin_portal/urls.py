@@ -1,6 +1,8 @@
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage, chatPageView
+from .views import HomePageView, CovidQuestionnairePage, LeaveApplicationPage, PendingLeaveApplicationPage, \
+    ChatPageView, CheckinPageView, AccountProfilePageView, PrintUsersPageView, PrintCovidPageView, \
+    CheckinOffsitePageView, CovidForPageView, CalendarPageView, CheckOutlcPageView, CheckOutoffPageView
 
 
 app_name = 'admin_portal'
@@ -12,5 +14,14 @@ urlpatterns = [
     path('leave-application/', LeaveApplicationPage.as_view(), name='leave-application'),
     path('pending-leave-applications/', PendingLeaveApplicationPage.as_view(), name='pending-leaves'),
     path('api/', include('admin_portal.api.urls')),
-    path('chat/', chatPageView.as_view(), name='chat'),
+    path('chat/', ChatPageView.as_view(), name='chat'),
+    path('checkin/', CheckinPageView.as_view(), name='check_in'),
+    path('checkinoffsite/', CheckinOffsitePageView.as_view(), name='checkinffsite'),
+    path('accountprofile/', AccountProfilePageView.as_view(), name='accountprofile'),
+    path('printusers/', PrintUsersPageView.as_view(), name='printusers'),
+    path('printcovid/', PrintCovidPageView.as_view(), name='printcovid'),
+    path('covidfor/', CovidForPageView.as_view(), name='covidfor'),
+    path('calendar/', CalendarPageView.as_view(), name='calendar'),
+    path('checkoutlc/', CheckOutlcPageView.as_view(), name='checkoutlc'),
+    path('checkoutoff/', CheckOutoffPageView.as_view(), name='checkoutoff'),
 ]

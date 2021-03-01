@@ -17,20 +17,20 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-<style>
-body {
-    background: #fff;
-    font-family: 'Epilogue', sans-serif;
-    overflow-x: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    background-image: url("{% static 'admin_portal/Img/lifechoicesbg.png' %}");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-}
+   <script>
+           $('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            // prevent collapse
+            e.stopPropagation();
+        }
+    }
+});
 
+        </script>
+
+<style>
 #Logo{
     height: 40px;
     margin-top: 8px;
@@ -584,6 +584,10 @@ textarea{
     margin-right: 0;
 }*/
 
+.checkinbtn{
+  display: none
+}
+
 
 </style>
 
@@ -604,15 +608,15 @@ textarea{
         <a href="{% url 'users:login' %}" id="SignInButton">Sign In</a>
         {% else %}
         <button id="UserDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img class="rounded-circle" src="{{ user.image.url }}">
+          <img class="rounded-circle" src="{{ user.imageURL }}">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
           {% if user.roles != 'visitor' %}
           <button class="dropdown-item d-none" type="button">Messages</button>
           <button class="dropdown-item" type="button">Clock In/Out</button>
-          <button class="dropdown-item" type="button"><a class="navbar-brand" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
+          <button class="dropdown-item" type="button"><a class="navdrop" href="{% url 'admin_portal:leave-application' %}">Leave Days</a></button>
           {% endif %}
-          <a href="{% url 'users:profile' %}" class="dropdown-item" type="button">Account</a>
+          <a href="{% url 'users:view-profile' %}" class="dropdown-item" type="button">Profile</a>
           <a href="{% url 'users:logout' %}" class="dropdown-item" type="button">Log Out</a>
         </div>
         {% endif %}
@@ -632,8 +636,31 @@ textarea{
           </ul>
       {% endif %}
       {% block content %}
-    {% endblock content %}
+      {% endblock content %}
     </div>
+<script>
+    var btn = document.getElementsByClassName("checkinbtn");
+    var x = document.getElementById("latitude");
+    var y = document.getElementById("longitude");
+			function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+				x.value = "Geolocation is not supported by this browser.";
+			}
+			}
 
+			function showPosition(position) {
+            console.log(position)
+			x.value = position.coords.latitude;
+			y.value = position.coords.longitude;
+			for (i = 0; i < btn.length; i++) {
+			    btn[i].style.display = "block";
+            };
+
+			}
+			getLocation()
+
+</script>
 </body>
 </html>

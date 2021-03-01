@@ -140,11 +140,8 @@
 				</div>
 			</div>
             <div class="row py-3">
-                <div class='col-12 pb-3'>
-                    <a type="button" class='btn col-12 btn-secondary editinfo' href="#">Edit Info</a>
-                </div>
                 <div class="col-6">
-                    <a type="button"class='btn btn-dark form-control declinebtn' href="#">Decline</a>
+                    <a type="button"class='btn btn-dark form-control declinebtn' href="{% url 'users:pending-accounts' %}">Decline</a>
                 </div>
                 <div class="col-6">
                     <a type="button" class='btn btn-success form-control approvebtn' href="{% url 'users:activate-account' user.id %}">Approve</a>

@@ -20,6 +20,7 @@ django-rest-knox==4.1.0
 django-storages==1.11.1
 djangorestframework
 djangorestframework-simplejwt
+geopy==2.1.0
 gunicorn==20.0.4
 hyperlink==21.0.0
 idna==3.1

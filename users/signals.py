@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, LifeChoicesStuff
+from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy
 
 
 @receiver(post_save, sender=User)

@@ -5,11 +5,11 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    background-image: url("Img/lifechoicesbg.png ");
+    /*background-image: url("Img/lifechoicesbg.png ");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    color: white !important;
+    color: white !important;*/
 
 }
 
@@ -191,6 +191,7 @@ h1{
     height: 40px;
     margin-top: 8px;
 }
+
 h1{
     margin: 18px 0 ! important;
     font-family: 'Caveat', cursive;
@@ -391,5 +392,161 @@ textarea{
 }
 .accountcolor {
 background-color: rgb(31, 30, 30, 0.3);
+}
+
+.navdrop:hover,
+.navdrop {
+text-decoration: none !important;
+color: white;
+}
+/* admin */
+.adminacc,
+.adminleave {
+	background-color: #d9d9d9;
+	border-radius: 10px;
+	/* height: 50px; */
+}
+.adminpen {
+}
+.adminhead {
+	color: #abcc37;
+}
+.adminbg {
+color: black;
+background: none;
+}
+
+.adminbtn {
+   background-color: #abcc37 !important;
+   background: #abcc37 !important;
+   border: none;
+}
+/* checkin */
+.covidbtn,
+.checkinbtn {
+	height: 60px;
+	width: 200px;
+	border-radius: 10px;
+	background-color: #abcc37;
+	color: white;
+}
+.checkinbtn {
+}
+.covidbtn {
+	background-color: rgb(171, 204, 55, 0.5);
+}
+.checktick {
+	color: #abcc37;
+}
+.checkinbg {
+color: black;
+}
+/*account profile */
+.profilepic {
+	height: 200px;
+	width: auto;
+	position: center;
+}
+/*.accpro {
+color : black;
+}*/
+/* print covid*/
+table, th, td {
+  border: 2px solid white !important;
+  padding:5px;
+}
+
+.printbtn{
+background: #abcc37 !important;
+border:none;
+}
+/*checkinoffsite */
+h4 {
+ margin: 18px 0 ! important;
+    font-family: 'Caveat', cursive;
+    color: #abcc37;
+    text-shadow: 1px 1px 2px #343a40;
+}
+
+.offsitebtn {
+background-color: #abcc37 !important;
+border: none;
+}
+
+.btn-primary {
+background-color: #abcc37 !important;
+border: none;
+}
+
+.pendleavepop {
+color: black;
+}
+/*
+calendar*/
+main {
+	grid-area: content;
+	padding: 48px;
+}
+
+.menu {
+	grid-area: menu;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.calendar__week,
+.calendar__header {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+}
+.calendar__week {
+	grid-auto-rows: 100px;
+	text-align: right;
+}
+
+.calendar__header {
+	grid-auto-rows: 50px;
+	align-items: center;
+	text-align: center;
+}
+
+.menu__item--active .menu__icon {
+	color: var(--red);
+}
+.menu__item--active .menu__text {
+	color: black;
+}
+
+.menu__item:hover {
+	color: black;
+}
+
+.copyright {
+	font-size: 0.7rem;
+	font-weight: 400;
+}
+
+.calendar {
+	background-color: white;
+	border: 1px solid #e1e1e1;
+}
+
+.calendar__header > div {
+	text-transform: uppercase;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.calendar__day {
+	border-right: 1px solid #e1e1e1;
+	border-top: 1px solid #e1e1e1;
+}
+
+.calendar__day:last-child {
+	border-right: 0;
+}
+.calbg{
+color: black;
 }
 

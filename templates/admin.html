@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container adminbg ">
+        <h3 class="adminhead">Admin Area</h3>
+            <div class="row">
+                <div class="col-4">
+                    <a href="/printcovid">
+                <button class="btn btn-primary adminbtn">View Covid Questions</button>
+                      </a>
+                </div>
+                <div class="col-4">
+                    <a href="/printusers">
+                <button class="btn btn-primary adminbtn">View Users</button>
+                    </a>
+                </div>
+
+            </div>
+        <div class="row">
+            <div class="py-3 col-12">
+                <h2>Pending Accounts</h2>
+                <div class="row  col-12 adminacc py-3">
+                    <div class="col-6">Lonwabo Mdazuka</div>
+                    <div class="col-6 text-right">View</div>
+                </div>
+                <br/>
+                <div class="row  col-12 adminacc py-3">
+                    <div class="col-6">Zayaan Stegmann</div>
+                    <div class="col-6 text-right">View</div>
+                </div>
+                <div class="row  col-12  py-3">
+                    <div class="col-12 adminpen">There are no pending account.</div>
+
+                </div>
+            </div>
+            <div class="py-3 col-12">
+                <h2>Pending Leave Requests</h2>
+                <div class="row  col-12 adminleave py-3">
+                    <div class="col-6">Michael Bruwer</div>
+                    <div class="col-6 text-right">View</div>
+                </div>
+                <br/>
+                <div class="row  col-12 adminleave py-3">
+                    <div class="col-6">Leigh Jean</div>
+                    <div class="col-6 text-right">View</div>
+                </div>
+                <div class="row  col-12  py-3">
+                    <div class="col-12 adminpen">There are no pending leave requests.</div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock content %}

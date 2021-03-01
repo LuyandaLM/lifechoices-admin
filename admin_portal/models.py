@@ -62,8 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     # signup fields
-    image = models.ImageField(
-        null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
+    image = models.ImageField(null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     # Employee identification
@@ -107,7 +106,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.user_name
+        return self.email
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
     # image re-sizing using PIL
     # def save(self, *args, **kwargs):
@@ -123,12 +130,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class LifeChoicesMember(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ID_number = models.IntegerField(null=True, blank=False)
+    ID_number = models.BigIntegerField(null=True, blank=False)
     chronic_condition = models.CharField(max_length=50, null=True, blank=False)
     allergies = models.CharField(max_length=50, null=True, blank=False)
 
     def __str__(self):
-        return self.user.user_name
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 # life-choice members
@@ -141,20 +148,20 @@ class LifeChoicesAcademy(models.Model):
 
 
 # life choices stuff
-class LifeChoicesStuff(models.Model):
+class BankingDetail(models.Model):
     user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
     # Banking details
     bank_name = models.CharField(max_length=50, null=True, blank=False)
-    account_holder_name = models.CharField(max_length=50, null=True, blank=False)
+    account_holder_name = models.CharField(
+        max_length=50, null=True, blank=False)
     account_number = models.CharField(max_length=50, null=True, blank=False)
     branch_name = models.CharField(max_length=50, null=True, blank=False)
     branch_number = models.CharField(max_length=50, null=True, blank=False)
     # chronic illness and allergies
-    WorkPermit_number = models.CharField(max_length=25, null=True, blank=False)
     tax_number = models.CharField(max_length=25, null=True, blank=False)
 
     def __str__(self):
-        return self.user.user.user_name
+        return f'{self.user.user.first_name} {self.user.user.last_name}'
 
 
 # Covid Questionnaires
@@ -189,7 +196,7 @@ class LeaveApplication(models.Model):
         ('Compensation Leave', 'Compensation Leave'),
         ('Other Leave', 'Other Leave')
     )
-    user = models.ForeignKey(LifeChoicesStuff, on_delete=models.CASCADE)
+    user = models.ForeignKey(LifeChoicesMember, on_delete=models.CASCADE)
 
     # info
     category = models.CharField(
@@ -212,8 +219,12 @@ class CheckIn(models.Model):
     location = models.CharField(max_length=255, blank=True)
     time_signed_in = models.DateTimeField(auto_now_add=True)
     time_signed_out = models.DateTimeField(blank=True)
+    remote_work = models.BooleanField(default=False)
 
     def checkout(self):
         self.time_signed_out = datetime.datetime.now()
+
+    def __str__(self):
+        return f"{self.user} signed in at {self.location}"
 
 

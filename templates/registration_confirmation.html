@@ -1,0 +1,21 @@
+{% extends 'login_base.html'%}
+{% load static %}
+{%block content %}
+		<div class="container">
+			<div class="row text-center py-5" style="background-color: rgba(50, 158, 168, 0.4);">
+				<div class="col-md-12">
+					<img class="regcimg" src="{% static 'Img/regcomp.png' %}" alt="Register Complete"  style="height: 100px;"/>
+				</div>
+				<div class="col-md-12 pt-4">
+					<span style="font-size: 30px;">
+						Thank you for registering with our admin app. Your registration is
+						currently awaiting approval and an email will be sent to you when
+						your account is activated.
+					</span>
+                    <div class="col-md-12 pt-4">
+                        <a href="{% url 'users:login' %}" class="btn btn-primary approvebtn">Back to Sign in</a>
+				</div>
+			</div>
+			</div>
+		</div>
+{% endblock %}

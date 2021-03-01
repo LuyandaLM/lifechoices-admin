@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container accpro">
+			<div>
+				<div class="row border-bottom pb-3">
+					<div class="col-6 d-sm-none d-md-block d-none d-sm-block">
+						<div class="row">
+							<img
+								class="profilepic col-md-6 rounded-circle"
+								src="{{ user.imageURL }}"
+								alt="profilepic"
+							/>
+							<h3 class="col-md-12">{{ user.user_name }}</h3>
+						</div>
+					</div>
+					<div class="col-6">
+						<form>
+							<div class="row form-group">
+								<label class="col-6"> First name: </label>
+								<span class="col-6"> {{user.first_name}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Last name: </label>
+								<span class="col-6"> {{user.last_name}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Gender: </label>
+								<span class="col-6"> {{user.gender}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> ID number: </label>
+								<span class="col-6"> {{member.ID_number}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Date of birth: </label>
+								<span class="col-6"> {{user.date_of_birth}}</span>
+							</div>
+							<div class="row form-group">
+								<a href="{% url 'users:update-profile' pk=user.id %}" class="col-6 btn btn-primary"> Update Account</a>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div id="accordion" class="accordion">
+					<div class="row border-bottom">
+						<div class="col">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse1"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse1"
+								style="border: none"
+							>
+								Personal details
+							</a>
+						</div>
+						<div class="col">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse2"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse2"
+								style="border: none"
+							>
+								Contact details
+							</a>
+						</div>
+						<div class="col">
+						<a
+							class="btn btndrop"
+							data-toggle="collapse"
+							href="#collapse4"
+                            data-parent="#accordion"
+							role="button"
+							aria-expanded="false"
+							aria-controls="collapse4"
+							style="border: none; color: white "
+						>
+							Family details
+						</a>
+					</div>
+						{% if member %}
+							<div class="col">
+							<a
+								class="btn dropdown"
+								data-toggle="collapse"
+								data-target="#collapse3"
+                                data-parent="#accordion"
+								role="button"
+								aria-expanded="false"
+								aria-controls="collapse3"
+								style="border: none"
+							>
+								Banking details
+							</a>
+						</div>
+
+					<div class="col">
+						<a
+							class="btn btndrop"
+							data-toggle="collapse"
+							href="#collapse5"
+                            data-parent="#accordion"
+							role="button"
+							aria-expanded="false"
+							aria-controls="collapse5"
+							style="border: none; color: white"
+						>
+							Medical details
+						</a>
+					</div>
+						{% endif %}
+
+					</div>
+					<div class="accordion-group">
+						<div class="row pt-3">
+							<div class="col-12 collapse  " id="collapse1" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-6"> First name</label>
+										<span class="col-6">{{user.first_name}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Last name</label>
+										<span class="col-6">{{user.last_name}}</span>
+
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Gender</label>
+										<span class="col-6">{{user.gender}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> ID number</label>
+										<span class="col-6">{{user.first_name}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Date of birth</label>
+										<span class="col-6">{{user.date_of_birth}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Martial status</label>
+										<span class="col-6">{{user.marital_status}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Nationality</label>
+										<span class="col-6">{{user.nationality}}</span>
+									</div>
+								</form>
+							</div>
+							<div class="col-12 collapse" id="collapse2" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-6"> Email Address</label>
+										<span class="col-6">{{user.email}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Telephone number</label>
+										<span class="col-6">{{user.telephone_number}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Cell number</label>
+										<span class="col-6">{{user.cell_number}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Address</label>
+										<span class="col-6">{{user.address}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Permanent telephone number</label>
+										<span class="col-6">{{user.permanent_telephone_number}}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Permanent address</label>
+										<span class="col-6">{{user.permanent_address}}</span>
+									</div>
+								</form>
+							</div>
+							<div class="col-12 collapse" id="collapse3" data-parent="#accordion">
+								<form>
+									<div class="row form-group">
+										<label class="col-6"> Bank name</label>
+										<span class="col-6">{{ bank_details.bank_name }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Account holder name</label>
+										<span class="col-6">{{ bank_details.account_holder_name }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Account number</label>
+										<span class="col-6">{{ bank_details.account_number }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Branch name</label>
+										<span class="col-6">{{ bank_details.branch_name }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Branch number</label>
+										<span class="col-6">{{ bank_details.branch_number }}</span>
+									</div>
+									<div class="row form-group">
+										<label class="col-6"> Tax number</label>
+										<span class="col-6">{{ bank_details.tax_number }}</span>
+									</div>
+								</form>
+							</div>
+							<div class="col-12 collapse" id="collapse4" data-parent="#accordion">
+						<form>
+							<div class="row form-group">
+								<label class="col-6"> Next of kin name</label>
+								<span class="col-6">{{user.next_of_kin_name}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Next of kin relationship</label>
+								<span class="col-6">{{user.next_of_kin_relationship}}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Next of kin contact number</label>
+								<span class="col-6">{{user.next_of_kin_contact_number}}</span>
+							</div>
+						</form>
+					</div>
+					<div class="col-12 collapse" id="collapse5" data-parent="#accordion">
+						<form>
+							<div class="row form-group">
+								<label class="col-6"> Chronic condition</label>
+								<span class="col-6">{{ member.chronic_condition }}</span>
+							</div>
+							<div class="row form-group">
+								<label class="col-6"> Allergies</label>
+								<span class="col-6">{{ member.allergies }}</span>
+							</div>
+						</form>
+					</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+        </div>
+
+		</div>
+{% endblock content %}

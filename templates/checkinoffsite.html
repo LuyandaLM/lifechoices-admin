@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+            <div class="row text-center">
+                <h1 class="col">Check into work outside</h1>
+            </div>
+            <div class="row">
+                <form method="POST" action="" class="col-md-12 text-center pt-3">
+                    <h4>
+                    Notify others
+                </h4>
+                {% csrf_token %}
+                <fieldset class="form-group d-none">
+                    <input class="form-control form-control-sm" name="latitude" id="latitude" />
+                    <input class="form-control form-control-sm" name="longitude" id="longitude" />
+                </fieldset>
+                <div class="form-group">
+                    <input type="checkbox" name="remote_work" checked/>
+                    <span>notify manager & staff that I will be working out of office</span>
+               </div>
+                    <div class="row">
+                <div class="col-md pt-3">
+                    <button class="btn btn-primary" type="submit">Check in</button>
+                </div></div>
+            </form>
+
+
+            </div>
+		</div>
+{% endblock content %}
