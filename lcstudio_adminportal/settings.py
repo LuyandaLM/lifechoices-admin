@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False   # bool(os.environ.get("LCS_DEBUG_VALUE"))
+DEBUG = True   # bool(os.environ.get("LCS_DEBUG_VALUE"))
 ALLOWED_HOSTS = ["https://lifechoices-admin.herokuapp.com/", "http://127.0.0.1:8000/"]
 
 
