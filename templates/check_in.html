@@ -15,23 +15,21 @@
         <div class="col-md-12 text-center pt-3">
             <span><i class="fas fa-check-circle fa-2x checktick pr-2"></i>Covid screening complete</span>
         </div>
-        </div>
-        <div class="row">
-        <form method="POST" action="" class="col-md-12 text-center>
+        <form method="POST" action="" >
              {% csrf_token %}
             <fieldset class="form-group d-none">
                     <input class="form-control form-control-sm" name="latitude" id="latitude" />
                     <input class="form-control form-control-sm" name="longitude" id="longitude" />
             </fieldset>
         <div class="row">
-            <div class="col-md pt-3">
-            <button class="btn covidbtn " type="submit">Check in</button>
-        </div>
+
         </div>
 
         </form>
+        <div class="col-md-12 text-center  pt-3">
+            <button class="btn covidbtn " type="submit">Check in</button>
         </div>
-
+    </div>
 </div>
 {% endblock content %}
 
