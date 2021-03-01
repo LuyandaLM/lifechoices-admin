@@ -5,11 +5,11 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    background-image: url("Img/lifechoicesbg.png ");
+    /*background-image: url("Img/lifechoicesbg.png ");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    color: white !important;
+    color: white !important;*/
 
 }
 
