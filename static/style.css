@@ -500,12 +500,12 @@ main {
 .calendar__header {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	padding: 10px;
+
 }
 .calendar__week {
 	grid-auto-rows: 50px;
 	text-align: right;
-
+padding: 10px;
 }
 
 .calendar__header {
