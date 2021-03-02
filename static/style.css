@@ -504,6 +504,7 @@ main {
 .calendar__week {
 	grid-auto-rows: 50px;
 	text-align: right;
+	padding-right: 5px;
 }
 
 .calendar__header {
