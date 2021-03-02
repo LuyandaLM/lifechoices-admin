@@ -223,12 +223,5 @@ class CheckIn(models.Model):
     time_signed_in = models.DateTimeField(auto_now_add=True)
     remote_work = models.BooleanField(default=False)
 
-
     def __str__(self):
-<<<<<<< HEAD
-        return f"{self.user} signed in at {self.location}"
-=======
         return f"{self.user} signed in at {self.location} at the time of {self.time_signed_in}"
-
-
->>>>>>> c6b25992f8b8933206f20f49227a381074241562
