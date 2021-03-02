@@ -10,14 +10,16 @@
         </div>
     <div class="row py-3">
         <div class="col-md-12 text-center">
-        <button class="btn covidbtn ">Covid Sreening</button>
+        <a class="btn covidbtn" href="/covid-questionnaire">Covid Sreening</a>
         </div>
         <div class="col-md-12 text-center pt-3">
             <span><i class="fas fa-check-circle fa-2x checktick pr-2"></i>Covid screening complete</span>
         </div>
+        </div>
         <div class="row">
-        <form method="POST" action="" class="col-md-12 text-center>
+        <form method="POST" action="" class="col-md-12 text-center">
              {% csrf_token %}
+
             <fieldset class="form-group d-none">
                     <input class="form-control form-control-sm" name="latitude" id="latitude" />
                     <input class="form-control form-control-sm" name="longitude" id="longitude" />
@@ -26,12 +28,12 @@
              <div class="row">
                  <div class="col-md-12 text-center  pt-3">
             <button class="btn covidbtn " type="submit">Check in</button>
-        </div>
+                </div>
              </div>
         </form>
         </div>
 
-    </div>
+
 </div>
 {% endblock content %}
 
