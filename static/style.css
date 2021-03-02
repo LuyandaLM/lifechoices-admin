@@ -515,11 +515,6 @@ padding: 10px;
 }
 
 
-
-.menu__item:hover {
-	color: black;
-}
-
 .calendar {
 	background-color: white;
 	border: 1px solid #e1e1e1;
