@@ -12,8 +12,7 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['email', 'user_name', 'first_name', 'last_name', 'gender', 'date_of_birth', 'cell_number',
-                  'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'roles']
+        fields = ['email', 'user_name', 'roles']
 
     def save(self, commit=True):
         """
@@ -26,6 +25,14 @@ class RegisterUserForm(UserCreationForm):
             user.is_active = True
         user.save()
         return user
+
+
+class RegisterForm2(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name',
+                  'gender', 'identity_number', 'cell_number']
 
 
 class GeneralUserUpdateForm(forms.ModelForm):
@@ -71,7 +78,7 @@ class BasicInfoForm(forms.ModelForm):
         model = User
         exclude = ('roles', 'is_staff', 'is_active', 'group', 'date_joined', 'last_login',
                    'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'password', 'groups')
-        fields = ['image', 'user_name', 'first_name', 'last_name', 'gender',
+        fields = ['image', 'user_name', 'first_name', 'identity_number', 'last_name', 'gender',
                   'date_of_birth', 'marital_status', 'nationality', 'address', 'cell_number']
 
 
@@ -87,5 +94,7 @@ class ContactDetailsForm(forms.ModelForm):
 class NextOfKinForm(forms.ModelForm):
     class Meta:
         model = User
-        exclude = ('roles', 'is_staff', 'is_active', 'group', 'date_joined', 'last_login', 'password', 'groups')
-        fields = ['next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number']
+        exclude = ('roles', 'is_staff', 'is_active', 'group',
+                   'date_joined', 'last_login', 'password', 'groups')
+        fields = ['next_of_kin_name', 'next_of_kin_relationship',
+                  'next_of_kin_contact_number']

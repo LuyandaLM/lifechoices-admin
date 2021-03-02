@@ -61,7 +61,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     # signup fields
-    image = models.ImageField(null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
+    image = models.ImageField(
+        null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     # Employee identification
@@ -74,6 +75,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Date of birth(mm/dd/yyyy) ", auto_now_add=False, auto_now=False, blank=True, null=True)
     marital_status = models.CharField(choices=marital_choices, max_length=20)
     nationality = models.CharField(max_length=50)
+    identity_number = models.CharField(max_length=20, null=True, blank=True)
 
     # Contact info
     address = models.TextField(max_length=200)
@@ -97,15 +99,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     next_of_kin_relationship = models.CharField(max_length=50)
     next_of_kin_contact_number = models.CharField(max_length=15)
 
-    date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
-    last_login = models.DateTimeField(verbose_name="last login", auto_now=True, null=True)
+    date_joined = models.DateTimeField(
+        verbose_name="date joined", auto_now_add=True)
+    last_login = models.DateTimeField(
+        verbose_name="last login", auto_now=True, null=True)
 
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.email
+        return f' {self.email}'
 
     @property
     def imageURL(self):
@@ -221,5 +225,3 @@ class CheckIn(models.Model):
 
     def __str__(self):
         return f"{self.user} signed in at {self.location}"
-
-

@@ -1,13 +1,81 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-             {% csrf_token %}
-    {{ form|crispy }}
-    {{ life_choices_form|crispy }}
-    {{ formset|crispy }}
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">UPDATE</button>
-    </div>
-</form>
-{% endblock content%}
+<div class="container adminbg ">
+	<h3 class="adminhead">Admin Area</h3>
+	<div class="row">
+		<div class="col-4">
+			<a href="/printcovid">
+				<button class="btn btn-primary adminbtn">View Covid Questions</button>
+			</a>
+		</div>
+		<div class="col-4">
+			<a href="/printusers">
+				<button class="btn btn-primary adminbtn">View Users</button>
+			</a>
+		</div>
+
+	</div>
+</div>
+<div class="container accpro">
+	<div class="row border-bottom pb-3">
+		<div class="col-6 d-sm-none d-md-block d-none d-sm-block">
+			<div class="row">
+				<img class="profilepic col-md-6 rounded-circle" src="{{ user.imageURL }}" alt="profilepic" />
+			</div>
+		</div>
+		<div class="col-md-6">
+            <div class="personal-details">
+                <ul class="nav nav-tabs">
+                	<li class="nav-item">
+                  		<a class="nav-link active" aria-current="page" href="{% url 'users:view-profile'%}">Overview</a>
+                	</li>
+                	<li class="nav-item">
+                  		<a class="nav-link" href="{% url 'users:update-profile' pk=user.id %}">Update</a>
+                	</li>
+              	</ul>
+            	<div class="personal-details--holder">
+                	<div class="flex  py-2">
+                  		<span class="text-gray-500">First Name</span>
+                  		<span class="ml-auto text-gray-900">{{user.first_name}}</span>
+                	</div>
+                	<div class="flex border-t border-gray-200 py-2">
+                  		<span class="text-gray-500">Last Name</span>
+                  		<span class="ml-auto text-gray-900">{{user.last_name}}</span>
+                	</div>
+                	<div class="flex border-t border-gray-200 py-2">
+                  		<span class="text-gray-500">Email</span>
+                  		<span class="ml-auto text-gray-900">{{user.email}}</span>
+                	</div>
+                	<div class="flex border-t border-gray-200 py-2">
+                  		<span class="text-gray-500">Phone Number</span>
+                  		<span class="ml-auto text-gray-900">{{user.cell_number}}</span>
+                	</div>
+                	<div class="flex border-t border-b mb-6 border-gray-200 py-2">
+                  		<span class="text-gray-500">Status</span>
+                  		<span class="ml-auto text-yellow-500 hover:text-blue-500">
+                    	{{user.groups.all.0}}
+                  		</span>
+                	</div>
+              	</div>
+            </div>
+		</div>
+	</div>
+	<div class="row border-bottom pb-3 ">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="{% url 'users:update-banking-details' %}">Banking Details</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'users:update-contact' %}">Contact Details</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'users:update-kin' %}">Next of Kin</a>
+			</li>
+			
+		</ul>
+	</div>
+				
+		
+</div>
+{% endblock content %}

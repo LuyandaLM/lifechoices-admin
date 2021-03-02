@@ -51,27 +51,8 @@
               </div>
             </div>
 		</div>
-		</div>
-        <div class="row border-bottom">
-            {% if user.role != 'visitor' %}
-
-            <div class="col">
-				<a href="{% url 'users:update-banking-details' %}" class="btn dropdown" style="border: none">
-					Banking Details
-				</a>
-			</div>
-            {% endif %}
-			<div class="col">
-				<a href="{% url 'users:update-contact' %}" class="btn dropdown" style="border: none">
-                    Contact details
-				</a>
-			</div>
-			<div class="col">
-                 <a href="{% url 'users:update-kin' %}" class="btn dropdown" style="border: none">
-                     Next of kin
-                 </a>
-			</div>
-		</div>
+	</div>
+      
     </div>
 </div>
 {% endblock content %}

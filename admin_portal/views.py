@@ -15,7 +15,8 @@ class HomePageView(View):
 
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):
-            messages.success(request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
+            messages.success(
+                request, f'{request.user.user_name} Please complete covid questionnaire before proceeding')
             return redirect('admin_portal:covid-questionnaire')
         if request.user.roles == 'visitor':
             return redirect('https://www.lifechoices.co.za/')
@@ -108,7 +109,8 @@ class CheckinPageView(View):
 
     def get(self, request, *args, **kwargs):
         if already_checked_in(request.user):
-            messages.success(request, f'{request.user.user_name} you have already checked-in')
+            messages.success(
+                request, f'{request.user.user_name} you have already checked-in')
             return redirect('admin_portal:home')
         return render(request, self.template_name)
 
@@ -118,9 +120,11 @@ class CheckinPageView(View):
         longitude = request.POST['longitude']
         current_location = get_current_location(latitude, longitude)
         location = current_location['display_name']
-        user_check_in = CheckIn(user=user, location=(current_location['display_name']))
+        user_check_in = CheckIn(user=user, location=(
+            current_location['display_name']))
         user_check_in.save()
-        messages.success(request, f"{user.user_name} you have checked-in at {location}")
+        messages.success(
+            request, f"{user.user_name} you have checked-in at {location}")
         return redirect('admin_portal:home')
 
 
@@ -129,7 +133,8 @@ class CheckinOffsitePageView(View):
 
     def get(self, request, *args, **kwargs):
         if already_checked_in(request.user):
-            messages.success(request, f'{request.user.user_name} you have already checked-in')
+            messages.success(
+                request, f'{request.user.user_name} you have already checked-in')
             return redirect('admin_portal:home')
         return render(request, self.template_name)
 
@@ -142,9 +147,11 @@ class CheckinOffsitePageView(View):
             remote_work = True
         current_location = get_current_location(latitude, longitude)
         location = current_location['display_name']
-        user_check_in = CheckIn(user=user, location=(current_location['display_name']), remote_work=remote_work)
+        user_check_in = CheckIn(user=user, location=(
+            current_location['display_name']), remote_work=remote_work)
         user_check_in.save()
-        messages.success(request, f"{user.user_name} you have checked-in at {location}")
+        messages.success(
+            request, f"{user.user_name} you have checked-in at {location}")
         return redirect('admin_portal:home')
 
 
