@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 
 
 from .email_confirmation import activate_email
-from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm
+from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm, RegisterForm2
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 
 
@@ -35,7 +35,7 @@ class Register(View):
         if form.is_valid():
             form.save()
             email = form.cleaned_data["email"]
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get('user_name')
             user = User.objects.filter(email=email).first()
             role = form.cleaned_data["roles"]
             user = form.save(commit=False)
@@ -43,27 +43,47 @@ class Register(View):
             # add groups to
             user_group = ''
             if role == "visitor":
-                group = Group.objects.get(name='visitor')
-                user.groups.add(group)
-                messages.success(request, f'{username} your account has been created! You are now able to log in')
                 user_group = Group.objects.get(name='visitor')
                 user.groups.add(user_group)
+                messages.success(
+                    request, f'{username} your account has been created! You are now able to log in')
                 return redirect('users:login')
             elif role == 'business_unit':
                 user_group = Group.objects.get(name='business_unit')
             elif role == '	staff':
                 user_group = Group.objects.get(name='staff')
             else:
-                group = Group.objects.get(name='student')
-                user.groups.add(group)
                 user_group = Group.objects.get(name='student')
             user.groups.add(user_group)
             messages.success(
                 request, f'{username} your account has been created! You are now able to log in')
-            return redirect('users:registration-confirmation')
+            return redirect('users:register2')
 
         else:
             return render(request, self.template_name, {'form': form})
+
+
+class RegisterStep(View):
+    """
+    registration form part 2 for non visitor users
+    """
+    form_class = RegisterForm2
+    template_name = 'register2.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        form = self.form_class()
+        context['form'] = form
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        context = {}
+        context['form'] = self.form_class
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('https://www.lifechoices.co.za/')
+        return render(request, self.template_name, context)
 
 
 class PendingAccounts(ListView):
@@ -94,10 +114,11 @@ def activate_account(request, pk):
 
 
 class ViewProfile(View):
-    template_name = 'account_profile.html'
+    template_name = 'profile/profile.html'
 
     def get(self, *args, **kwargs):
-        member = LifeChoicesMember.objects.filter(user=self.request.user.id).first()
+        member = LifeChoicesMember.objects.filter(
+            user=self.request.user.id).first()
         if member:
             student = LifeChoicesAcademy.objects.filter(user=member.id).first()
             bank_details = BankingDetail.objects.filter(user=member.id).first()
