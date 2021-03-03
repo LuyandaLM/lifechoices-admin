@@ -1,9 +1,10 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
-import datetime
+from datetime import datetime
 
 
 # Custom Account manager
@@ -134,7 +135,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class LifeChoicesMember(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     ID_number = models.BigIntegerField(null=True, blank=False)
     chronic_condition = models.CharField(max_length=50, null=True, blank=False)
     allergies = models.CharField(max_length=50, null=True, blank=False)
@@ -171,7 +173,8 @@ class BankingDetail(models.Model):
 
 # Covid Questionnaires
 class CovidQuestionnaire(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     # info
     temperature = models.DecimalField(max_digits=5, decimal_places=2)
     Shortness_of_breath = models.BooleanField(default=True)
@@ -216,18 +219,15 @@ class LeaveApplication(models.Model):
     #     return f"Leave request by {self.user} from {self.leave_date_from} - {self.leave_date_to}"
 
 
-class CheckIn(models.Model):
-    """
-    the checkin time of the user along with the location they are signing into
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+""" class CheckIn(models.Model):
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    remote_work = models.BooleanField(default=False)
     location = models.CharField(max_length=255, blank=True)
     time_signed_in = models.DateTimeField(auto_now_add=True)
-    time_signed_out = models.DateTimeField(blank=True)
-    remote_work = models.BooleanField(default=False)
-
-    def checkout(self):
-        self.time_signed_out = datetime.datetime.now()
+    time_signed_out = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return f"{self.user} signed in at {self.location} at the time of {self.time_signed_in}"
+ """

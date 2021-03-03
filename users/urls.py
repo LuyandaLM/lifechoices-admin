@@ -1,29 +1,50 @@
-from django.urls import path
+"""lcstudio_adminportal URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib.auth import views as auth_views
-from .views import Register, RegisterParttwo, PendingAccounts, ActivatePendingAccount, activate_account, ViewProfile, AdminPageView, \
-    RegistrationConfirmation, update_profile, update_bankingdetails, update_kin_details, update_contact_details
-
-
-app_name = 'users'
 
 urlpatterns = [
-    #path('profile/', views.profile, name='profile'),
-    path('register/', Register.as_view(), name='register'),
-    path('register/part2/', RegisterParttwo.as_view(), name='registerp2'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('pending-accounts/', PendingAccounts.as_view(), name='pending-accounts'),
-    path('pending-accounts/<int:pk>', ActivatePendingAccount.as_view(),
-         name='activate-pending-accounts'),
-    path('activate-account/<int:pk>', activate_account, name='activate-account'),
-    path('view-profile/', ViewProfile.as_view(), name='view-profile'),
-    path('admin-page/', AdminPageView.as_view(), name='admin'),
-    # path('account-profile/', AccountProfilePageView.as_view(), name='accountprofile'),
-    path('registration-confirmation/', RegistrationConfirmation.as_view(),
-         name='registration-confirmation'),
-    path('update-profile/<int:pk>/', update_profile, name='update-profile'),
-    path('update-banking-details/', update_bankingdetails,
-         name='update-banking-details'),
-    path('update-kin-details/', update_kin_details, name='update-kin'),
-    path('update-contact-details/', update_contact_details, name='update-contact')
+    path('admin/', admin.site.urls),
+    path('', include('admin_portal.urls')),
+    path('user/', include('users.urls')),
+    #path('auth/', include('BankingDetail.urls')),
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'),
+         name='password_reset'),
+    path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='password_reset_confirm.html'),
+         name='password_reset_confirm'),
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(
+             template_name='password_reset_complete.html'),
+         name='password_reset_complete'),
 ]
+
+handler404 = 'admin_portal.views.error_404'
+handler500 = 'admin_portal.views.error_500'
+handler403 = 'admin_portal.views.error_403'
+handler400 = 'admin_portal.views.error_400'
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

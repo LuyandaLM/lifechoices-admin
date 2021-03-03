@@ -12,7 +12,7 @@ def write_to_covid_csv():
         for questionnaire in questionnaires:
             writer.writerow({'temperature': questionnaire.temperature,
                              "Shortness_of_breath": questionnaire.Shortness_of_breath,
-                             "sore_throat":questionnaire.sore_throat,
+                             "sore_throat": questionnaire.sore_throat,
                              "loss_of_taste_or_smell": questionnaire.loss_of_taste_or_smell,
                              "contact_with_Covid": questionnaire.contact_with_Covid,
                              "nasal_congestion": questionnaire.nasal_congestion,
@@ -38,7 +38,7 @@ def write_to_user_csv():
                              'marital_status': user.marital_status, 'date_of_birth': user.date_of_birth,
                              'nationality': user.nationality, 'address': user.address,
                              'telephone_number': user.telephone_number, 'cell_number': user.cell_number,
-                             'permanent_address':user.permanent_address, 'next_of_kin_name': user.next_of_kin_name,
+                             'permanent_address': user.permanent_address, 'next_of_kin_name': user.next_of_kin_name,
                              'permanent_telephone_number': user.permanent_telephone_number,
                              'next_of_kin_relationship': user.next_of_kin_relationship,
                              'next_of_kin_contact_number': user.next_of_kin_contact_number})
@@ -63,7 +63,7 @@ def write_to_leave_csv():
         return leave_file
 
 
-def write_to_check_in_csv():
+""" def write_to_check_in_csv():
     entries = CheckIn.objects.all()
     with open('check-in.csv', mode="w") as check_in_file:
         fieldnames = ["user", "location", "time_signed_in"]
@@ -74,3 +74,4 @@ def write_to_check_in_csv():
                              "location": entry.location,
                              "time_signed_in": entry.time_signed_in})
         return check_in_file
+ """

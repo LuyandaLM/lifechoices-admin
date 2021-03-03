@@ -5,16 +5,16 @@ from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, CheckIn
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, BankingDetail
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 from .forms import CovidForm
-from .writing_to_csv import write_to_check_in_csv
+#from .writing_to_csv import write_to_check_in_csv
 from .location.location import get_current_location
 
 
 class HomePageView(View):
     template_name = "index.html"
-    write_to_check_in_csv()
+    # write_to_check_in_csv()
 
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):
@@ -107,7 +107,7 @@ class ChatPageView(View):
         return render(request, self.template_name)
 
 
-class CheckinPageView(View):
+class BankingDetailPageView(View):
     template_name = "check_in.html"
 
     def get(self, request, *args, **kwargs):
@@ -123,16 +123,16 @@ class CheckinPageView(View):
         longitude = request.POST['longitude']
         current_location = get_current_location(latitude, longitude)
         location = current_location['display_name']
-        user_check_in = CheckIn(user=user, location=(
-            current_location['display_name']))
-        user_check_in.save()
+        # user_check_in = BankingDetail(user=user, location=(
+        # current_location['display_name']))
+        # user_check_in.save()
         messages.success(
             request, f"{user.user_name} you have checked-in at {location}")
         return redirect('admin_portal:home')
 
 
-class CheckinOffsitePageView(View):
-    template_name = "checkinoffsite.html"
+class BankingDetailOffsitePageView(View):
+    template_name = "BankingDetailoffsite.html"
 
     def get(self, request, *args, **kwargs):
         if already_checked_in(request.user):
@@ -150,7 +150,7 @@ class CheckinOffsitePageView(View):
             remote_work = True
         current_location = get_current_location(latitude, longitude)
         location = current_location['display_name']
-        user_check_in = CheckIn(user=user, location=(
+        user_check_in = BankingDetail(user=user, location=(
             current_location['display_name']), remote_work=remote_work)
         user_check_in.save()
         messages.success(
@@ -159,7 +159,7 @@ class CheckinOffsitePageView(View):
 
 
 def already_checked_in(user):
-    check_in_locations = CheckIn.objects.filter(user=user)
+    check_in_locations = BankingDetail.objects.filter(user=user)
     todays_date = datetime.now().date()
     for check_in in check_in_locations:
         if todays_date == check_in.time_signed_in.date():
