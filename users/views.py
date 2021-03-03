@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 
-from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm
+from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm, RegisterformTwo
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 
 
@@ -22,15 +22,17 @@ class Register(View):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data["email"]
-            username = form.cleaned_data.get('username')
-            user = User.objects.filter(email=email).first()
             role = form.cleaned_data["roles"]
+            user = User.objects.filter(email=email).first()
             user = form.save(commit=False)
             user.save()
             # add groups to
             user_group = ''
             if role == "visitor":
                 user_group = Group.objects.get(name='visitor')
+                user.groups.add(user_group)
+                return redirect('users:login')
+
             elif role == 'business_unit':
                 user_group = Group.objects.get(name='business_unit')
             elif role == '	staff':
@@ -40,75 +42,27 @@ class Register(View):
 
             user.groups.add(user_group)
             messages.success(
-                request, f'{username} your account has been created! You are now able to log in')
-            return redirect('users:login')
+                request, f'{email} your account has been created! You are now able to log in')
+            return redirect('users:registerp2')
         else:
             return render(request, self.template_name, {'form': form})
 
 
-""" def profile(request):
-    user = request.user
-    # load form specific to user
-    user_form = GeneralUserUpdateForm(instance=user)
-    if user.groups.filter(name='visitor').exists():
-        user_form = GeneralUserUpdateForm(instance=user)
-    elif user.groups.filter(name='business_unit').exists():
-        user_form = StaffUpdateForm(instance=user)
-    elif user.groups.filter(name='staff').exists():
-        user_form = StaffUpdateForm(instance=user) 
-    elif user.groups.filter(name='student').exists():
-        user_form = StudentUpdateForm(instance=user)
+class RegisterParttwo(View):
+    form_class = RegisterformTwo
+    template_name = 'register2.html'
+    initial = {'key': 'value'}
 
-    if request.method == "GET":
-        if additional_forms(request)[1]:
-            context = {
-                'form': user_form,
-                'life_choices_form': additional_forms(request)[0],
-                'formset': additional_forms(request)[1],
-            }
-        else:
-            context = {
-                'form': user_form,
-            }
-        return render(request, 'profile.html', context=context)
+    def get(self, request, *args, **kwargs):
+        context = {}
+        context['form'] = self.form_class(initial=self.initial)
+        return render(request, self.template_name, context)
 
-    if request.method == 'POST':
-        if user.groups.filter(name='visitor').exists():
-            user_form = GeneralUserUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-        elif user.groups.filter(name='business_unit').exists():
-            user_form = StaffUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                print(request.POST)
-                user_form.save()
-        elif user.groups.filter(name='staff').exists():
-            user_form = StaffUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-        elif user.groups.filter(name='student').exists():
-            user_form = StudentUpdateForm(
-                request.POST, request.FILES, instance=user)
-            if user_form.is_valid():
-                user_form.save()
-
-        messages.success(request, f'account update successfully')
-        return redirect('users:profile') """
-
-
-""" def additional_forms(request):
-    formset = None
-    member = LifeChoicesMember.objects.filter(user=request.user).first()
-    life_choices_form = LifeChoicesForm(instance=member)
-    if request.user.roles == 'business_unit' or 'staff':
-        instance = Bankingdetails.objects.filter(user=member).first()
-        formset = StaffUpdateForm(instance=instance)
-    elif request.user.roles == 'student':
-        formset = StudentUpdateForm(instance=request.user)
-    return life_choices_form, formset """
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('https://www.lifechoices.co.za/')
 
 
 class PendingAccounts(ListView):

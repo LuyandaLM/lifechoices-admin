@@ -7,13 +7,12 @@ from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, Ban
 
 class RegisterUserForm(UserCreationForm):
     """
-    registering all the users that would like to use our account
+    Universal registration form for all users
     """
 
     class Meta:
         model = User
-        fields = ['email', 'user_name', 'first_name', 'last_name', 'gender', 'date_of_birth', 'cell_number',
-                  'next_of_kin_name', 'next_of_kin_relationship', 'next_of_kin_contact_number', 'roles']
+        fields = ['email', 'roles']
 
     def save(self, commit=True):
         """
@@ -21,11 +20,23 @@ class RegisterUserForm(UserCreationForm):
         :param commit: standarded
         :return: the user's account activated or not activated
         """
-        user = super().save(commit=False)
+        user = super(RegisterUserForm, self).save(commit=False)
         if self.cleaned_data["roles"] == "visitor":
             user.is_active = True
+        else:
+            user.is_active = False
         user.save()
         return user
+
+
+class RegisterformTwo(forms.ModelForm):
+    """
+    Part two form ,user registration for all non visitors
+    """
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'gender',
+                  'date_of_birth', 'nationality', 'identity_number', 'cell_number']
 
 
 class GeneralUserUpdateForm(forms.ModelForm):

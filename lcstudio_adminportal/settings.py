@@ -184,7 +184,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 TEMP = os.path.join(BASE_DIR, 'media_cdn_temp')
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'admin_portal:home'
 LOGIN_URL = '/user/login'
 
 AUTH_USER_MODEL = "admin_portal.User"

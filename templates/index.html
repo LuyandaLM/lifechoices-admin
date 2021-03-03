@@ -13,7 +13,22 @@
                 <a href="{% url 'admin_portal:home' %}"><div class="notification-item">{{ leaves_applications.count }} Pending Leaves</div></a>
             {% endif %}
         {% endif %}
-        <div class="notification-item">You have 7 new messages</div>
+        <!--
+            <div class="notification-item">You have 7 new messages</div>
+        -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <a href="{% url 'admin_portal:covid-questionnaire' %}" class="notification-item">Covid Questionaire</a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="notification-item">Notifications</a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="notification-item">Messages</a>
+            </div>
+
+        </div>
+        
     </div>
     <div id="NavigationBox" class="row gutter">
         <div class=" col-6 col-md-4 col-lg-3">
