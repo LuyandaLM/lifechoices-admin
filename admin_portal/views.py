@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, CheckIn
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 from .forms import CovidForm
 from .location.location import get_current_location
 

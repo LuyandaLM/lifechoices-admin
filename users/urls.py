@@ -1,14 +1,15 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import Register, RegisterStep, PendingAccounts, ActivatePendingAccount, activate_account, ViewProfile, AdminPageView, \
+from .views import Register, RegisterParttwo, PendingAccounts, ActivatePendingAccount, activate_account, ViewProfile, AdminPageView, \
     RegistrationConfirmation, update_profile, update_bankingdetails, update_kin_details, update_contact_details
 
 
 app_name = 'users'
 
 urlpatterns = [
+    #path('profile/', views.profile, name='profile'),
     path('register/', Register.as_view(), name='register'),
-    path('register/step-2/', RegisterStep.as_view(), name='register2'),
+    path('register/part2/', RegisterParttwo.as_view(), name='registerp2'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('pending-accounts/', PendingAccounts.as_view(), name='pending-accounts'),

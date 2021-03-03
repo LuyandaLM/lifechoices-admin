@@ -64,7 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     image = models.ImageField(
         null=True, blank=True, default="profile_pictures/default.jpg", upload_to='profile_pictures/')
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, blank=True, null=True)
     # Employee identification
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
@@ -76,6 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     marital_status = models.CharField(choices=marital_choices, max_length=20)
     nationality = models.CharField(max_length=50)
     identity_number = models.CharField(max_length=20, null=True, blank=True)
+    identity_number = models.CharField(null=True, blank=True, max_length=20)
 
     # Contact info
     address = models.TextField(max_length=200)
@@ -160,7 +161,7 @@ class BankingDetail(models.Model):
     account_number = models.CharField(max_length=50, null=True, blank=False)
     branch_name = models.CharField(max_length=50, null=True, blank=False)
     branch_number = models.CharField(max_length=50, null=True, blank=False)
-    # chronic illness and allergies
+    # tax number
     tax_number = models.CharField(max_length=25, null=True, blank=False)
 
     def __str__(self):

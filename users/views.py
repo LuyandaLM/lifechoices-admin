@@ -5,9 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 
-
-from .email_confirmation import activate_email
-from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm, RegisterForm2
+from .forms import RegisterUserForm, BankingDetailsForm, BasicInfoForm, NextOfKinForm, ContactDetailsForm, RegisterformTwo
 from admin_portal.models import User, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 
 
@@ -35,9 +33,8 @@ class Register(View):
         if form.is_valid():
             form.save()
             email = form.cleaned_data["email"]
-            username = form.cleaned_data.get('user_name')
-            user = User.objects.filter(email=email).first()
             role = form.cleaned_data["roles"]
+            user = User.objects.filter(email=email).first()
             user = form.save(commit=False)
             user.save()
             # add groups to
@@ -45,9 +42,8 @@ class Register(View):
             if role == "visitor":
                 user_group = Group.objects.get(name='visitor')
                 user.groups.add(user_group)
-                messages.success(
-                    request, f'{username} your account has been created! You are now able to log in')
                 return redirect('users:login')
+
             elif role == 'business_unit':
                 user_group = Group.objects.get(name='business_unit')
             elif role == '	staff':
@@ -56,34 +52,27 @@ class Register(View):
                 user_group = Group.objects.get(name='student')
             user.groups.add(user_group)
             messages.success(
-                request, f'{username} your account has been created! You are now able to log in')
-            return redirect('users:register2')
-
+                request, f'{email} your account has been created! You are now able to log in')
+            return redirect('users:registerp2')
         else:
             return render(request, self.template_name, {'form': form})
 
 
-class RegisterStep(View):
-    """
-    registration form part 2 for non visitor users
-    """
-    form_class = RegisterForm2
+class RegisterParttwo(View):
+    form_class = RegisterformTwo
     template_name = 'register2.html'
+    initial = {'key': 'value'}
 
     def get(self, request, *args, **kwargs):
         context = {}
-        form = self.form_class()
-        context['form'] = form
+        context['form'] = self.form_class(initial=self.initial)
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        context = {}
-        context['form'] = self.form_class
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('https://www.lifechoices.co.za/')
-        return render(request, self.template_name, context)
+        return redirect('https://www.lifechoices.co.za/')
 
 
 class PendingAccounts(ListView):
@@ -109,7 +98,7 @@ def activate_account(request, pk):
     user.save()
     messages.success(
         request, f"{user.user_name}'s account activated successfully")
-    activate_email(user)
+    # activate_email(user)
     return redirect('users:pending-accounts')
 
 

@@ -16,19 +16,22 @@
                 <a href="{% url 'admin_portal:pending-leaves' %}"><div class="notification-item col-12">{{ leaves_applications.count }} Pending Leaves</div></a>
             {% endif %}
         {% endif %}
-        <div class="row">
+        <!--
+            <div class="notification-item">You have 7 new messages</div>
+        -->
+        <div class="row mb-3">
             <div class="col-md-4">
-                <a href="{% url 'admin_portal:covid-questionnaire' %}" class="notification-item my-auto"> Covid Questionaire</a>
+                <a href="{% url 'admin_portal:covid-questionnaire' %}" class="notification-item">Covid Questionaire</a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="notification-item my-auto"> Messages</a>
+                <a href="#" class="notification-item">Notifications</a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="notification-item my-auto"> Notifications</a>
+                <a href="#" class="notification-item">Messages</a>
             </div>
+
         </div>
         
-        <div class="notification-item col-12 mt-3">You have 7 new messages</div>
     </div>
     <div id="NavigationBox" class="row gutter">
         <div class=" col-6 col-md-4 col-lg-4">
