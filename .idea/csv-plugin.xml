@@ -10,7 +10,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/admin_portal/forms.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/admin_portal/writing_to_csv.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/lcstudio_adminportal/settings.py">
           <value>
             <Attribute>
               <option name="separator" value="," />
