@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'knox',
     'storages',
+    'django_toggle_switch_widget',
 
     # local apps
     'admin_portal',
