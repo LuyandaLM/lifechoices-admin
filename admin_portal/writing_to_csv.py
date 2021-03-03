@@ -44,3 +44,33 @@ def write_to_user_csv():
                              'next_of_kin_contact_number': user.next_of_kin_contact_number})
 
         return users_file
+
+
+def write_to_leave_csv():
+    leaves = LeaveApplication.objects.all()
+    with open('leave.csv', mode='w') as leave_file:
+        fieldnames = ["category", "personal_message", "leave_date_from",
+                      "leave_date_to", "pre_authorisation"]
+        writer = csv.DictWriter(leave_file, fieldnames=fieldnames)
+        writer.writeheader()
+        for leave in leaves:
+            writer.writerow({"category": leave.category,
+                             "personal_message": leave.personal_message,
+                             "leave_date_from": leave.leave_date_from,
+                             "leave_date_to": leave.leave_date_to,
+                             "pre_authorisation": leave.pre_authorisation})
+
+        return leave_file
+
+
+def write_to_check_in_csv():
+    entries = CheckIn.objects.all()
+    with open('check-in.csv', mode="w") as check_in_file:
+        fieldnames = ["user", "location", "time_signed_in"]
+        writer = csv.DictWriter(check_in_file, fieldnames=fieldnames)
+        writer.writeheader()
+        for entry in entries:
+            writer.writerow({"user": entry.user,
+                             "location": entry.location,
+                             "time_signed_in": entry.time_signed_in})
+        return check_in_file

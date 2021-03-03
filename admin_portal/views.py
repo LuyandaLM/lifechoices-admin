@@ -8,11 +8,13 @@ from django.contrib import messages
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, CheckIn
 from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
 from .forms import CovidForm
+from .writing_to_csv import write_to_check_in_csv
 from .location.location import get_current_location
 
 
 class HomePageView(View):
     template_name = "index.html"
+    write_to_check_in_csv()
 
     def get(self, request, *args, **kwargs):
         if not covid_questionnaire_completed(request.user.id):

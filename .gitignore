@@ -223,5 +223,8 @@ db.sqlite3
 
 local_settings.py
 
+# csv's
+*.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/venv,macos,visualstudiocode,windows,node
 
