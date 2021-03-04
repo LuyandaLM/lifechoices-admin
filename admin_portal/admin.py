@@ -10,4 +10,4 @@ admin.site.register(LifeChoicesAcademy)
 admin.site.register(BankingDetail)
 # admin.site.register(BankingDetail)
 
-# admin.site.site_header = "Administration"
+admin.site.site_header = "Administration"
