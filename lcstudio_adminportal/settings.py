@@ -29,8 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True   # bool(os.environ.get("LCS_DEBUG_VALUE"))
-ALLOWED_HOSTS = ["https://lifechoices-admin.herokuapp.com/",
-                 "http://127.0.0.1:8000/"]
+ALLOWED_HOSTS = ["https://lifechoices-admin.herokuapp.com/", "http://127.0.0.1:8000/"]
 
 
 # Application definition
@@ -49,7 +48,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'knox',
     'storages',
-    'django_toggle_switch_widget',
 
     # local apps
     'admin_portal',
@@ -108,7 +106,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
         },
     },
 }
@@ -180,7 +178,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 TEMP = os.path.join(BASE_DIR, 'media_cdn_temp')
 
-LOGIN_REDIRECT_URL = 'admin_portal:home'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/user/login'
 
 AUTH_USER_MODEL = "admin_portal.User"
