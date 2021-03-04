@@ -78,7 +78,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     marital_status = models.CharField(choices=marital_choices, max_length=20)
     nationality = models.CharField(max_length=50)
     identity_number = models.CharField(max_length=20, null=True, blank=True)
-    identity_number = models.CharField(null=True, blank=True, max_length=20)
+    
 
     # Contact info
     address = models.TextField(max_length=200)
