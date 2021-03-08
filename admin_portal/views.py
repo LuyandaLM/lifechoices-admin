@@ -5,15 +5,16 @@ from django.views.generic import View, ListView
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, BankingDetail
-from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail
+from .models import CovidQuestionnaire, User, LeaveApplication, LifeChoicesMember, LifeChoicesAcademy, BankingDetail \
+    , CheckIn
 from .forms import CovidForm
-#from .writing_to_csv import write_to_check_in_csv
+# from .writing_to_csv import write_to_check_in_csv
 from .location.location import get_current_location
 
 
 class HomePageView(View):
     template_name = "index.html"
+
     # write_to_check_in_csv()
 
     def get(self, request, *args, **kwargs):
@@ -241,6 +242,57 @@ def error_401(request, exception):
 def error_402(request, exception):
     data = {}
     return render(request, 'error_handling_pages/402.html', data)
+
+
+class CheckinPageView(View):
+    template_name = "check_in.html"
+
+    def get(self, request, *args, kwargs):
+        if already_checked_in(request.user):
+            messages.success(
+                request, f'{request.user.user_name} you have already checked-in')
+            return redirect('admin_portal:home')
+        return render(request, self.template_name)
+
+    def post(self, request, *args, kwargs):
+        user = request.user
+        latitude = request.POST['latitude']
+        longitude = request.POST['longitude']
+        current_location = get_current_location(latitude, longitude)
+        location = current_location['display_name']
+        user_check_in = CheckIn(user=user, location=(
+            current_location['display_name']))
+        user_check_in.save()
+        messages.success(
+            request, f"{user.user_name} you have checked-in at {location}")
+        return redirect('admin_portal:home')
+
+
+class CheckinOffsitePageView(View):
+    template_name = "checkinoffsite.html"
+
+    def get(self, request, *args, kwargs):
+        if already_checked_in(request.user):
+            messages.success(
+                request, f'{request.user.user_name} you have already checked-in')
+            return redirect('admin_portal:home')
+        return render(request, self.template_name)
+
+    def post(self, request, *args, kwargs):
+        user = request.user
+        latitude = request.POST['latitude']
+        longitude = request.POST['longitude']
+        remote_work = False
+        if request.POST['remote_work'] == 'on':
+            remote_work = True
+        current_location = get_current_location(latitude, longitude)
+        location = current_location['display_name']
+        user_check_in = CheckIn(user=user, location=(
+            current_location['display_name']), remote_work=remote_work)
+        user_check_in.save()
+        messages.success(
+            request, f"{user.user_name} you have checked-in at {location}")
+        return redirect('admin_portal:home')
 
 
 class CheckOutlcPageView(View):

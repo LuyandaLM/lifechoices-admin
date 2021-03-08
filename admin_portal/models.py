@@ -36,7 +36,7 @@ class CustomAccountManager(BaseUserManager):
         other_fields.setdefault('user_name', 'Username')
         other_fields.setdefault('first_name', 'First Name')
         other_fields.setdefault('last_name', 'Last Name')
-        user = self.model(email=email, password=password, **other_fields)
+        user = self.model(email=email, password=password)
         user.set_password(password)
         user.save()
         return user
@@ -79,7 +79,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     nationality = models.CharField(max_length=50)
     identity_number = models.CharField(max_length=20, null=True, blank=True)
 
-
     # Contact info
     address = models.TextField(max_length=200)
     telephone_number = models.CharField(max_length=15, null=False, blank=False)
@@ -109,7 +108,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomAccountManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['user_name']
 
     def __str__(self):
         return f' {self.email}'
@@ -135,7 +134,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class LifeChoicesMember(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(User,
                              on_delete=models.CASCADE)
     ID_number = models.BigIntegerField(null=True, blank=False)
     chronic_condition = models.CharField(max_length=50, null=True, blank=False)
@@ -219,8 +218,8 @@ class LeaveApplication(models.Model):
     #     return f"Leave request by {self.user} from {self.leave_date_from} - {self.leave_date_to}"
 
 
-""" class CheckIn(models.Model):
-    
+class CheckIn(models.Model):
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     remote_work = models.BooleanField(default=False)
@@ -230,4 +229,3 @@ class LeaveApplication(models.Model):
 
     def __str__(self):
         return f"{self.user} signed in at {self.location} at the time of {self.time_signed_in}"
- """

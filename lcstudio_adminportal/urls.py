@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('admin_portal.urls')),
-    path('user/', include('users.urls')),
-    #path('auth/', include('authentication.urls')),
+    path('users/', include("users.urls", namespace="users")),
+    # path('auth/', include('authentication.urls')),
+    # path('', CheckinPageView.as_view(), name='home')
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'),
          name='password_reset'),
     path('password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
@@ -48,3 +50,5 @@ if settings.DEBUG:
                           document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
+
+
